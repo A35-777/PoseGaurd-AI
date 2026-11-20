@@ -2,7 +2,7 @@
 ### Autonomous 3D Skeletal Animation Motion Defect Analysis System
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](docs/CHANGELOG.md)
-[![Model](https://img.shields.io/badge/model-poseguard--tiny--v1%20(0.84%20MB)-emerald.svg)](docs/MODEL_CARD.md)
+[![Model](https://img.shields.io/badge/model-poseguard--tiny--v1%20(855%20KB)-emerald.svg)](docs/MODEL_CARD.md)
 [![Device](https://img.shields.io/badge/hardware-CPU%20Only%20(No%20CUDA)-orange.svg)](docs/BENCHMARKS.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-26%20Passed-brightgreen.svg)](tests/)
@@ -44,7 +44,7 @@ PoseGuard AI operates on a three-tiered hybrid architecture that combines determ
                 v                             v
 +-----------------------------+ +-----------------------------+
 |  DETERMINISTIC GEOMETRIC    | |   COMPACT TEMPORAL NEURAL   |
-|      KINEMATIC ENGINE       | |     CLASSIFIER (0.84 MB)    |
+|      KINEMATIC ENGINE       | |     CLASSIFIER (855 KB)     |
 | - Horizontal sliding speed  | | - 48-Channel Kinematic Feats|
 | - Ground plane penetration  | | - 1D Temporal ResConv Net   |
 | - Acceleration/Jerk limits  | | - Bidirectional GRU (Time)  |
@@ -148,8 +148,8 @@ Evaluated on the held-out unseen sequence (`subj_06_pivot_turn`, 84 temporal win
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Deterministic Geometry Baseline** | 27.38% | 0.4351 | 0.3290 | 76.25% | **0.10 ms** | 0.0 MB |
 | **Simple Statistical Baseline (Z-Score)** | 17.86% | 0.1231 | 0.1600 | 10.00% | 0.14 ms | 0.0 MB |
-| **Compact Neural Model (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **0.84 MB** |
-| **Calibrated Hybrid Model (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **0.84 MB** |
+| **Compact Neural Model (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **855 KB** |
+| **Calibrated Hybrid Model (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **855 KB** |
 
 *Hardware: AMD PRO A12-9800B CPU, Single-Threaded CPU Execution, PyTorch 2.15.0+cpu.*
 

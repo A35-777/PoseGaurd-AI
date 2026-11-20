@@ -26,8 +26,8 @@ PoseGuard AI is a lightweight, hybrid AI and geometric analysis system designed 
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Deterministic Geometry Baseline** | 27.38% | 0.4351 | 32.90% | **76.25%** | **0.10 ms** | 0.0 MB |
 | **Statistical Baseline (Z-Score)** | 17.86% | 0.1231 | 16.00% | 10.00% | 0.14 ms | 0.0 MB |
-| **Compact Neural (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **0.84 MB** |
-| **Calibrated Hybrid (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **0.84 MB** |
+| **Compact Neural (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **855 KB** |
+| **Calibrated Hybrid (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **855 KB** |
 
 *Note: Evaluated on 84 temporal windows of Subject 6 (Pivot Turn) motion family with zero sequence overlap.*
 

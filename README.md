@@ -140,8 +140,8 @@ The benchmark below compares the 4 diagnostic approaches on an unseen, held-out 
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Deterministic Geometry Baseline** | 27.38% | 0.4351 | 32.90% | **76.25%** | **0.10 ms** | 0.0 MB |
 | **Simple Statistical Baseline (Z-Score)** | 17.86% | 0.1231 | 16.00% | 10.00% | 0.14 ms | 0.0 MB |
-| **Compact Neural Model (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **0.84 MB** |
-| **Calibrated Hybrid Model (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **0.84 MB** |
+| **Compact Neural Model (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **855 KB** |
+| **Calibrated Hybrid Model (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **855 KB** |
 
 *Note on Evaluation: The reported benchmark strictly represents performance on the held-out Subject 6 (Pivot Turn) motion family with zero sequence leakage. It demonstrates temporal generalization across sharp turning kinematics rather than universal validation across all commercial game rigs.*
 

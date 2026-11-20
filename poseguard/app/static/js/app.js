@@ -24,7 +24,7 @@ async function fetchSystemInfo() {
     try {
         const res = await fetch("/api/info");
         const data = await res.json();
-        document.getElementById("badge-model").textContent = `${data.model_version} • 0.84 MB • CPU`;
+        document.getElementById("badge-model").textContent = `${data.model_version} • 214K params (855 KB) • CPU`;
         document.getElementById("badge-ram").textContent = `RAM: ${data.ram_available_gb} GB Free (${data.ram_percent}%)`;
     } catch (e) {
         console.warn("Could not fetch system info:", e);

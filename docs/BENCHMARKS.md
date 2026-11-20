@@ -15,8 +15,8 @@ This document reports empirical benchmarks comparing four defect detection appro
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Deterministic Geometry** | 27.38% | 83.10% | 0.4351 | 0.3290 | 76.25% | 15.3% | 23.8% | 0.284 | 0.218 | **0.10 ms** | **0.0 MB** |
 | **Statistical Baseline (Z-Score)**| 17.86% | 76.43% | 0.1231 | 0.1600 | 10.00% | 7.9% | 90.0% | 0.412 | 0.365 | 0.14 ms | **0.0 MB** |
-| **Compact Neural (PoseGuardNet)** | **82.14%** | **94.76%** | **0.7962** | 91.67% | **72.50%** | **2.38%** | 27.5% | **0.142** | **0.089** | 0.53 ms | 0.84 MB |
-| **Calibrated Hybrid (PoseGuard AI)**| **77.38%** | **93.81%** | **0.7447** | **92.18%** | 65.00% | **2.06%** | 35.0% | **0.125** | **0.076** | 0.64 ms | 0.84 MB |
+| **Compact Neural (PoseGuardNet)** | **82.14%** | **94.76%** | **0.7962** | 91.67% | **72.50%** | **2.38%** | 27.5% | **0.142** | **0.089** | 0.53 ms | 855 KB |
+| **Calibrated Hybrid (PoseGuard AI)**| **77.38%** | **93.81%** | **0.7447** | **92.18%** | 65.00% | **2.06%** | 35.0% | **0.125** | **0.076** | 0.64 ms | 855 KB |
 
 *Tested on host CPU: AMD PRO A12-9800B R7 (4 Cores, 4 Threads), PyTorch 2.15.0+cpu, Windows 10 Pro 64-bit.*
 
