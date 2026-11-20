@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use PoseGuard AI in your animation research or production pipeline, please cite it as below."
+title: "PoseGuard AI: Lightweight 3D Skeletal Animation Motion Defect Analysis"
+version: 1.0.0-beta
+date-released: 2026-11-19
+url: "https://github.com/your-username/poseguard-ai"
+authors:
+  - name: "PoseGuard AI Contributors"
+keywords:
+  - animation
+  - motion-capture
+  - defect-detection
+  - kinematics
+  - computer-vision
+  - tiny-ai
+license: Apache-2.0
+

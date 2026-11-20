@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Datasets and training caches (preserve locally, exclude from public Git repository)
+data/raw/
+data/processed/
+data/synthetic/
+
+# Unit test / coverage reports
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local cache & temporary files
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets & credentials
+*.env
+*.key
+*.pem
+*.token
+credentials.json

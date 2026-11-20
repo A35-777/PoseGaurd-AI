@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — PoseGuard AI</title>
+  <meta name="description" content="Release notes, updates, and version history for PoseGuard AI.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="max-width: 800px; margin: 1rem auto 3rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">Release Notes &amp; Changelog</h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2rem;">
+        Detailed history of releases, new features, model checkpoints, and security improvements.
+      </p>
+
+      <div class="card" style="margin-bottom: 2.5rem; border-color: var(--border-focus);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.0-beta</h2>
+            <span class="beta-badge">Current Release</span>
+          </div>
+          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-19</span>
+        </div>
+
+        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">✨ Major Capabilities</h4>
+        <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
+          <li><strong>PoseGuardNet Model</strong>: Lightweight 214,597 parameter Conv1D-Residual-BiGRU network (855 KB checkpoint).</li>
+          <li><strong>5 Defect Detectors</strong>: Automated identification of foot sliding, ground penetration, unnatural pose transitions, contact inconsistency, and bone stretch anomalies.</li>
+          <li><strong>Calibrated Hybrid Engine</strong>: Cross-validates neural temporal defect scores against deterministic geometric boundaries.</li>
+          <li><strong>Interactive 3D Web Studio</strong>: Embedded Three.js skeletal viewer with defect timeline scrub bar and frame-accurate inspection.</li>
+          <li><strong>Multi-Format Ingestion</strong>: Pure-Python forward kinematics BVH parser and standardized NumPy (.npz, .npy) loaders.</li>
+          <li><strong>Headless REST API &amp; CLI</strong>: Automated batch QA via <code>poseguard analyze</code>, <code>batch</code>, <code>inspect</code>, and FastAPI endpoints.</li>
+          <li><strong>100% Offline CPU Execution</strong>: Inferences run in under 0.65 ms on standard multi-core CPUs with zero CUDA requirements.</li>
+        </ul>
+
+        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">🔒 Security &amp; Hardening</h4>
+        <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
+          <li>Bounded file uploads to 50 MB to prevent resource exhaustion attacks.</li>
+          <li>Sanitized uploaded filenames using <code>os.path.basename</code> to prevent directory traversal vectors.</li>
+          <li>Configured localhost-only default network bindings and restricted CORS origins.</li>
+        </ul>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/your-username/poseguard-ai/releases/tag/v1.0.0-beta" class="btn btn-primary" target="_blank" rel="noopener">Download Source Distribution (ZIP)</a>
+          <a href="https://github.com/your-username/poseguard-ai/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary" target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin: 0 auto;">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

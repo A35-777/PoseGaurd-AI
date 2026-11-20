@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &amp; Architecture — PoseGuard AI</title>
+  <meta name="description" content="The design philosophy, engineering methodology, and architectural principles behind PoseGuard AI.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="about.html" class="active">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="max-width: 800px; margin: 1rem auto 3rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">About PoseGuard AI</h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2rem;">
+        PoseGuard AI was conceived with a strict technical constraint: build a complete, highly effective animation quality inspection system capable of training and running on consumer hardware with zero cloud dependencies and zero budget.
+      </p>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Philosophy: Tiny AI Over Bloated Foundations</h3>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+          In an era where software routinely pulls multi-gigabyte foundation models or depends on high-latency cloud APIs, PoseGuard AI demonstrates what disciplined domain-specific modeling can accomplish.
+        </p>
+        <p style="color: var(--text-muted); line-height: 1.6;">
+          Rather than treating 3D skeletal data as generic token sequences or RGB video streams, PoseGuardNet operates directly on 48 channels of invariant kinematic physics: joint velocities, second-derivative accelerations, relative ground heights, and bone segment rigidities. By embedding physical inductive biases directly into the feature representation, a 214,597 parameter network (855 KB) out-diagnoses massive unspecialized architectures while executing on CPU in under 0.65 milliseconds.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Independent Training &amp; Zero Budget Engineering</h3>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+          PoseGuard AI was engineered, trained, and evaluated autonomously on an entry-level development workstation:
+        </p>
+        <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
+          <li><strong>Workstation CPU</strong>: AMD PRO A12-9800B R7 (4 physical cores, 2.7 GHz base clock)</li>
+          <li><strong>System RAM</strong>: 8 GB DDR4 (process memory strictly kept under 280 MB)</li>
+          <li><strong>GPU Hardware</strong>: Integrated AMD Radeon graphics (Zero CUDA, zero cloud GPUs)</li>
+          <li><strong>Budget</strong>: ₹0 / $0 — Zero paid APIs, zero commercial dataset licenses, zero cloud subscriptions</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Public Beta &amp; Honest Positioning</h3>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+          We do not claim that PoseGuard AI solves all character animation defects or eliminates the need for human artistic review. It is engineered as an <em>automated QA assistant</em>:
+        </p>
+        <p style="color: var(--text-muted); line-height: 1.6;">
+          Defect reports are structured suggestions designed to accelerate review workflows, prevent common mocap retargeting flaws from slipping into game builds, and provide objective physical bounds for character locomotion.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin: 0 auto;">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

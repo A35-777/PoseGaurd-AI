@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoseGuard AI — 3D Skeletal Animation Quality Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Bundled local Three.js and OrbitControls for 100% offline operation -->
+  <script src="js/three.min.js"></script>
+  <script src="js/OrbitControls.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">PG</div>
+      <div class="brand-title">POSEGUARD AI</div>
+      <span class="brand-subtitle">STUDIO</span>
+    </div>
+    <div class="header-status">
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span id="badge-model">poseguard-tiny-v1 • 0.84 MB • CPU</span>
+      </div>
+      <div class="status-pill">
+        <span id="badge-ram">RAM: Checking...</span>
+      </div>
+      <div class="status-pill" style="color: var(--accent-emerald); font-weight: 600;">
+        <span>Offline Active (100% Local)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Left Sidebar: Import & Configuration -->
+    <aside class="left-sidebar">
+      
+      <!-- Import Section -->
+      <div class="sidebar-section">
+        <div class="section-title">
+          <span>Animation Ingestion</span>
+          <span style="font-size: 10px; color: var(--accent-cyan);">BVH / NPZ / NPY</span>
+        </div>
+        
+        <input type="file" id="file-input" accept=".bvh,.npz,.npy" style="display: none;">
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">📁</div>
+          <div class="dropzone-text">Drop animation file here</div>
+          <div class="dropzone-hint">Supports BVH, NumPy NPZ, or NPY</div>
+        </div>
+        
+        <!-- One-Click Demo Animations -->
+        <div style="font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin: 12px 0 6px 0;">
+          Or Select Demo Sequence
+        </div>
+        <div class="demo-buttons">
+          <button class="btn-demo" onclick="loadDemo('walk_clean')">✓ Pristine Walk</button>
+          <button class="btn-demo" onclick="loadDemo('foot_sliding')">⚠ Foot Sliding</button>
+          <button class="btn-demo" onclick="loadDemo('ground_penetration')">⚠ Penetration</button>
+          <button class="btn-demo" onclick="loadDemo('pose_transition')">⚠ Jerk Spike</button>
+          <button class="btn-demo" onclick="loadDemo('contact_inconsistency')">⚠ Contact Chatter</button>
+          <button class="btn-demo" onclick="loadDemo('bone_stretch')">⚠ Bone Stretch</button>
+          <button class="btn-demo" onclick="loadDemo('pivot_turn_clean')">✓ Pristine Pivot</button>
+        </div>
+      </div>
+
+      <!-- Skeleton Metadata Preview -->
+      <div class="sidebar-section">
+        <div class="section-title">Skeleton Metadata</div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; word-break: break-all;">
+          File: <strong id="meta-filename" style="color: var(--text-primary);">-</strong>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-label">Frames</div>
+            <div class="meta-value" id="meta-frames">-</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">FPS</div>
+            <div class="meta-value" id="meta-fps">-</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Duration</div>
+            <div class="meta-value" id="meta-duration">-</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Joints</div>
+            <div class="meta-value" id="meta-joints">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Defect Detection Configuration -->
+      <div class="sidebar-section">
+        <div class="section-title">Detection Filters</div>
+        <div class="filter-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-sliding" checked>
+            <span>Foot Sliding (Drift on Stance)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-penetration" checked>
+            <span>Ground Penetration (Floor Clipping)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-transition" checked>
+            <span>Unnatural Transitions (Jerk Spikes)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-contact" checked>
+            <span>Contact Inconsistency (Chatter/Drag)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-stretch" checked>
+            <span>Bone Stretch Anomaly (Rigidity)</span>
+          </label>
+        </div>
+
+        <div class="input-row">
+          <span style="font-size: 12px; color: var(--text-secondary);">Ground Plane (Y in meters):</span>
+          <input type="number" step="0.01" id="input-ground-y" class="num-input" value="0.00">
+        </div>
+
+        <button id="btn-analyze" class="btn-primary">⚡ Run Quality Analysis</button>
+      </div>
+
+    </aside>
+
+    <!-- Center 3D Viewport & Playback Scrubber -->
+    <main class="main-viewport-area">
+      
+      <!-- Overlay Information -->
+      <div class="viewport-overlay">
+        <div class="overlay-chip">3D VIEWPORT • <span>ORBIT CAMERA</span></div>
+        <div class="overlay-chip">DRAG TO ROTATE • RIGHT-CLICK TO PAN • SCROLL TO ZOOM</div>
+      </div>
+
+      <!-- 3D Canvas -->
+      <div id="viewport-canvas"></div>
+
+      <!-- Bottom Playback Control Bar -->
+      <div class="playback-bar">
+        <button id="btn-play" class="play-btn" title="Play/Pause">▶</button>
+        <button id="btn-prev" class="step-btn" title="Previous Frame">⏮</button>
+        <button id="btn-next" class="step-btn" title="Next Frame">⏭</button>
+        
+        <div class="timeline-container">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="100" value="0">
+          <div id="timeline-defects" class="timeline-defects-track" title="Defect intervals along timeline"></div>
+        </div>
+
+        <div class="frame-counter">
+          FRAME <strong id="frame-current">0</strong> / <span id="frame-total">0</span>
+        </div>
+
+        <select id="select-speed" class="num-input" style="width: 70px;">
+          <option value="0.25">0.25x</option>
+          <option value="0.5">0.5x</option>
+          <option value="1.0" selected>1.0x</option>
+          <option value="2.0">2.0x</option>
+        </select>
+      </div>
+
+    </main>
+
+    <!-- Right Sidebar: Defect Findings & Reports -->
+    <aside class="findings-panel">
+      
+      <div class="findings-header">
+        <div class="section-title" style="margin-bottom: 0;">Analysis Findings</div>
+        <span id="status-badge" class="badge-status">READY</span>
+      </div>
+
+      <!-- Findings List -->
+      <div id="findings-list" class="findings-list">
+        <div style="text-align: center; color: var(--text-muted); padding: 40px 10px;">
+          Ready to analyze. Click <strong>"Run Quality Analysis"</strong> on the left panel.
+        </div>
+      </div>
+
+      <!-- Export Actions Footer -->
+      <div class="export-footer">
+        <a id="btn-export-json" class="btn-secondary" href="#" download>Export JSON</a>
+        <a id="btn-export-csv" class="btn-secondary" href="#" download>Export CSV</a>
+        <button id="btn-copy-findings" class="btn-secondary">Copy Summary</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" style="display: none; position: fixed; inset: 0; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; flex-direction: column; gap: 14px;">
+    <div style="width: 44px; height: 44px; border: 4px solid var(--border-color); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+    <div id="loading-msg" style="font-weight: 600; color: var(--text-primary);">Processing...</div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- App JavaScript -->
+  <script src="js/viewer3d.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
+

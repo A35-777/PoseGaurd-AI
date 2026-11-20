@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoseGuard AI — 3D Skeletal Animation Motion Defect Analysis</title>
+  <meta name="description" content="Lightweight, hybrid AI and geometric analysis system to autonomously detect foot sliding, ground penetration, unnatural pose transitions, and contact inconsistencies in 3D animations.">
+  <meta name="keywords" content="3D animation QA, motion defects, foot sliding detection, skeletal animation, motion capture, BVH analysis, tiny AI">
+  <meta name="author" content="PoseGuard AI Contributors">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://poseguard.ai/">
+  <meta property="og:title" content="PoseGuard AI — Catch Animation Flaws Before Final Render">
+  <meta property="og:description" content="Autonomous 3D skeletal animation defect analysis powered by an independently trained 855 KB neural network and deterministic geometric verifier.">
+  <meta property="og:image" content="https://poseguard.ai/og-preview.png">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PoseGuard AI — 3D Skeletal Animation Defect Analysis">
+  <meta name="twitter:description" content="100% offline CPU motion quality inspection. Identifies foot sliding, ground penetration, and joint pops.">
+  <meta name="twitter:image" content="https://poseguard.ai/og-preview.png">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org SoftwareApplication JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PoseGuard AI",
+    "operatingSystem": "Windows 10/11, Linux, macOS",
+    "applicationCategory": "DeveloperApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    },
+    "description": "Autonomous 3D skeletal animation motion defect analysis system for detecting foot sliding, ground penetration, and unnatural pose transitions.",
+    "softwareVersion": "1.0.0-beta",
+    "license": "https://www.apache.org/licenses/LICENSE-2.0"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="features.html">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container" style="padding-top: 1rem; padding-bottom: 2rem;">
+        <span class="beta-badge" style="margin-bottom: 1.5rem; display: inline-block;">v1.0.0 Public Beta — 100% Offline &amp; CPU-Native</span>
+        <h1>Find the flaws hidden in your <br><span class="gradient">3D skeletal animations.</span></h1>
+        <p class="lead">
+          PoseGuard AI autonomously inspects character motion sequences to detect foot sliding, ground penetration, unnatural pose transitions, and contact inconsistencies before they reach the final render.
+        </p>
+        <div class="hero-actions">
+          <a href="docs.html#quick-start" class="btn btn-primary">Download PoseGuard v1.0.0</a>
+          <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">Explore on GitHub</a>
+        </div>
+
+        <!-- Terminal / UI Preview Mockup -->
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-title">poseguard analyze clip.bvh -- 3D Interactive Studio</span>
+          </div>
+          <div class="terminal-body">
+<span style="color:#38bdf8;">$ poseguard analyze data/raw/subj_01_walk_clean.bvh</span>
+================================================================================
+  POSEGUARD AI MOTION DEFECT ANALYSIS REPORT
+================================================================================
+File: subj_01_walk_clean.bvh | Frames: 120 | FPS: 60.0 | Duration: 2.00s
+Overall Status: <span style="color:#22c55e; font-weight:bold;">CLEAN</span> | Defect-Free Frames: 100.0% | Total Defects: 0
+Model: PoseGuardNet (214K params, 855 KB) | Execution: 100% Offline CPU (0.64 ms/win)
+--------------------------------------------------------------------------------
+No biomechanical defects detected. Animation meets physical motion thresholds.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Defect Categories -->
+    <section class="container">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">Automated Motion Defect Detection</h2>
+      <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem;">
+        Five rigorous physical defect categories analyzed with deterministic geometric verification and neural temporal pattern recognition.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="card-icon">👟</span>
+          <h3>Foot Sliding</h3>
+          <p>Flags planted contact states where feet drag horizontally across the ground plane instead of holding firm position.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🕳️</span>
+          <h3>Ground Penetration</h3>
+          <p>Pinpoints frames where foot, ankle, or body joints clip through the calculated or configured world ground reference plane.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">⚡</span>
+          <h3>Unnatural Pose Transitions</h3>
+          <p>Identifies acceleration spikes (>90 m/s²), popping joints, and angular jerk from frame drops or retargeting flaws.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🔄</span>
+          <h3>Contact Inconsistency</h3>
+          <p>Detects rapid on/off contact state chatter and foot dragging without vertical flight clearance during liftoff.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">📏</span>
+          <h3>Bone Stretch Anomalies</h3>
+          <p>Enforces anatomical rigid-body invariance by catching non-rigid bone expansion or compression (>6% variation).</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🖥️</span>
+          <h3>Interactive 3D Web Studio</h3>
+          <p>Scrub animations frame-by-frame with a built-in Three.js skeletal viewer, visual defect timeline, and exportable JSON/CSV logs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & CPU Execution -->
+    <section class="container" style="border-top: 1px solid var(--border); padding-top: 3.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+        <div>
+          <span class="beta-badge" style="margin-bottom: 0.75rem; display: inline-block;">Independently Trained</span>
+          <h2 style="font-size: 2rem; line-height: 1.25; margin-bottom: 1rem;">Compact 855 KB Model.<br>Zero Cloud Latency.</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1rem;">
+            PoseGuardNet uses a tailored 1D Conv-Residual-BiGRU architecture with 214,597 parameters. It requires no CUDA GPUs, no external API keys, and zero cloud bandwidth.
+          </p>
+          <ul style="color: var(--text-muted); list-style: square; padding-left: 1.25rem; line-height: 1.8;">
+            <li><strong style="color: var(--text-main);">0.64 ms Latency</strong>: Real-time analysis on standard multi-core consumer CPUs.</li>
+            <li><strong style="color: var(--text-main);">Zero Sequence Overlap</strong>: Evaluated on held-out subject kinematics.</li>
+            <li><strong style="color: var(--text-main);">100% Offline Privacy</strong>: Your character rigs and proprietary animations never leave your machine.</li>
+          </ul>
+        </div>
+        <div class="terminal-window" style="margin: 0;">
+          <div class="terminal-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-title">Python SDK Quick-Start</span>
+          </div>
+          <div class="terminal-body">
+<span style="color:#64748b;"># Install &amp; inspect animation with 4 lines</span>
+<span style="color:#06b6d4;">from</span> poseguard <span style="color:#06b6d4;">import</span> PoseGuard
+
+detector = PoseGuard()
+result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
+
+<span style="color:#06b6d4;">print</span>(f<span style="color:#38bdf8;">"Defect-Free Frames: {result.quality_summary.defect_free_frame_percentage}%"</span>)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benchmark Summary -->
+    <section class="container" style="border-top: 1px solid var(--border); padding-top: 3.5rem;">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">Empirical Benchmark Performance</h2>
+      <p style="text-align: center; color: var(--text-muted); max-width: 680px; margin: 0 auto 2rem;">
+        Measured on an unseen, held-out test motion family (Subject 6 Pivot Turn, 84 temporal windows) under single-threaded CPU execution:
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Architecture</th>
+              <th>Exact Accuracy</th>
+              <th>Macro F1</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>CPU Latency</th>
+              <th>Checkpoint Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Deterministic Geometry</strong></td>
+              <td>27.38%</td>
+              <td>0.4351</td>
+              <td>32.90%</td>
+              <td><strong>76.25%</strong></td>
+              <td><strong>0.10 ms</strong></td>
+              <td>0.0 MB</td>
+            </tr>
+            <tr>
+              <td><strong>Simple Statistical Baseline</strong></td>
+              <td>17.86%</td>
+              <td>0.1231</td>
+              <td>16.00%</td>
+              <td>10.00%</td>
+              <td>0.14 ms</td>
+              <td>0.0 MB</td>
+            </tr>
+            <tr>
+              <td><strong>PoseGuardNet (Neural)</strong></td>
+              <td><strong>82.14%</strong></td>
+              <td><strong>0.7962</strong></td>
+              <td>91.67%</td>
+              <td>72.50%</td>
+              <td>0.53 ms</td>
+              <td><strong>0.84 MB</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Calibrated Hybrid (PoseGuard AI)</strong></td>
+              <td><strong>77.38%</strong></td>
+              <td><strong>0.7447</strong></td>
+              <td><strong>92.18%</strong></td>
+              <td>65.00%</td>
+              <td>0.64 ms</td>
+              <td><strong>0.84 MB</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-dim); text-align: center;">
+        *Note: Benchmark evaluated strictly on held-out Subject 6 Pivot Turn motion sequences. Full details and methodology available on the <a href="benchmarks.html" style="color: var(--cyan);">Benchmarks page</a>.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="container" style="border-top: 1px solid var(--border); padding-top: 3.5rem;">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="faq-item">
+          <h4>Does PoseGuard AI require an NVIDIA GPU or CUDA?</h4>
+          <p>No. PoseGuard AI is designed specifically for lightweight CPU-only execution. The neural network and geometric engines run smoothly on standard multi-core consumer processors with under 280 MB RAM footprint.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>What 3D animation file formats are supported?</h4>
+          <p>Native parsing is supported for BioVision Hierarchy (.bvh), as well as standardized NumPy joint sequence files (.npz, .npy). FBX workflows can be converted via standard Blender or motion pipeline scripts.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Are my proprietary animations uploaded to the cloud?</h4>
+          <p>Never. PoseGuard AI operates 100% offline. The local web interface and API bind to localhost (127.0.0.1) and make zero network requests.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>What does "Public Beta" mean for this release?</h4>
+          <p>PoseGuard AI v1.0.0-beta provides robust automated defect recommendations based on geometric and neural analysis. However, it is an advisory diagnostic aid for animators and QA teams, not an absolute substitute for human creative judgment.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h5>PoseGuard AI</h5>
+        <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+          Autonomous, lightweight 3D skeletal animation motion defect analysis system. Built with independently trained tiny AI and deterministic kinematic verification.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="benchmarks.html">Benchmarks</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Developers</h5>
+        <ul>
+          <li><a href="https://github.com/your-username/poseguard-ai" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="docs.html#sdk">Python SDK</a></li>
+          <li><a href="docs.html#cli">CLI Reference</a></li>
+          <li><a href="feedback.html">Report Bug</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Governance</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Notice</a></li>
+          <li><a href="about.html">About &amp; Philosophy</a></li>
+          <li><a href="https://github.com/your-username/poseguard-ai/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0 License</a></li>
+          <li><a href="https://github.com/your-username/poseguard-ai/blob/main/SECURITY.md" target="_blank" rel="noopener">Security Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta | 100% Offline Local Architecture</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

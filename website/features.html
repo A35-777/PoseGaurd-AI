@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features — PoseGuard AI Motion Defect Detection</title>
+  <meta name="description" content="In-depth breakdown of the 5 core motion defect categories identified by PoseGuard AI: foot sliding, ground penetration, unnatural pose transitions, and more.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="features.html" class="active">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="text-align: center; max-width: 760px; margin: 1rem auto 3rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">Biomechanical Defect Detection</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        PoseGuard AI combines deterministic kinematic bounds with temporal residual convolutions to isolate and categorize physical motion anomalies.
+      </p>
+    </div>
+
+    <!-- Defect 1 -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span class="card-icon" style="margin: 0;">👟</span>
+        <h2 style="font-size: 1.5rem;">1. Foot Sliding (Skating)</h2>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Occurs when an animation character's foot touches down on the ground plane but shifts or drifts horizontally relative to the environment without intentional locomotion traction.
+      </p>
+      <div style="background: var(--bg-code); padding: 1rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; border: 1px solid var(--border);">
+        <strong>Detection Criteria:</strong><br>
+        • Ground Contact State: Foot height \(Y_{foot} \le Y_{ground} + 0.045\text{ m}\)<br>
+        • Horizontal Velocity: \(v_{xz} = \sqrt{v_x^2 + v_z^2} > 0.08\text{ m/s}\)<br>
+        • Persistence: Sustained horizontal slip \(\ge 3\) consecutive frames
+      </div>
+    </div>
+
+    <!-- Defect 2 -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span class="card-icon" style="margin: 0;">🕳️</span>
+        <h2 style="font-size: 1.5rem;">2. Ground Penetration (Floor Clipping)</h2>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Occurs when the character's feet, ankles, or lower limb joints pass beneath the established ground reference plane, creating immersion-breaking visual artifacts in game engines or render viewports.
+      </p>
+      <div style="background: var(--bg-code); padding: 1rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; border: 1px solid var(--border);">
+        <strong>Detection Criteria:</strong><br>
+        • Vertical Joint Position: \(Y_{joint} < Y_{ground} - 0.02\text{ m}\)<br>
+        • Severity Escalation: Measured in negative millimeters beneath the floor datum<br>
+        • Support: Auto-calibrated ground level or manual animator override (\(--ground-y\))
+      </div>
+    </div>
+
+    <!-- Defect 3 -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span class="card-icon" style="margin: 0;">⚡</span>
+        <h2 style="font-size: 1.5rem;">3. Unnatural Pose Transitions (Jitter &amp; Pops)</h2>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Flags sudden acceleration discontinuities, popping limbs, and unnatural angular velocities resulting from retargeting gimbal-lock flips, corrupted mocap frames, or dropped interpolation keys.
+      </p>
+      <div style="background: var(--bg-code); padding: 1rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; border: 1px solid var(--border);">
+        <strong>Detection Criteria:</strong><br>
+        • Joint Acceleration: \(a_{joint} = \left\|\frac{\mathbf{v}_{t} - \mathbf{v}_{t-1}}{\Delta t}\right\| > 90.0\text{ m/s}^2\)<br>
+        • Jerk Discontinuity: Temporal spike exceeding natural biological joint limits<br>
+        • Differentiation: Distinguishes intentional sprint bursts from instantaneous single-frame teleports
+      </div>
+    </div>
+
+    <!-- Defect 4 -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span class="card-icon" style="margin: 0;">🔄</span>
+        <h2 style="font-size: 1.5rem;">4. Contact Inconsistency (Chatter &amp; Drag)</h2>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Detects conflicting foot flight states, such as rapid alternating ground contacts (chatter) or feet dragging along the floor during mid-swing without appropriate vertical clearance.
+      </p>
+      <div style="background: var(--bg-code); padding: 1rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; border: 1px solid var(--border);">
+        <strong>Detection Criteria:</strong><br>
+        • State Chatter: \(\ge 3\) transitions within any 5-frame temporal window<br>
+        • Swing Clearance: Forward velocity \(v_z > 0.4\text{ m/s}\) while vertical clearance remains below \(0.015\text{ m}\)
+      </div>
+    </div>
+
+    <!-- Defect 5 -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span class="card-icon" style="margin: 0;">📏</span>
+        <h2 style="font-size: 1.5rem;">5. Bone Stretch Anomalies (Non-Rigid Rig Violations)</h2>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Enforces anatomical rigid-body distance conservation along skeletal limb segments (e.g. Femur, Tibia, Humerus).
+      </p>
+      <div style="background: var(--bg-code); padding: 1rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; border: 1px solid var(--border);">
+        <strong>Detection Criteria:</strong><br>
+        • Segment Length: \(L(t) = \|\mathbf{p}_{child}(t) - \mathbf{p}_{parent}(t)\|\)<br>
+        • Stretch Threshold: \(\frac{|L(t) - L_{nominal}|}{L_{nominal}} > 0.06\) (6% tolerance)<br>
+        • Rig Invariance: Preserves artistic scale factors while flagging unintentional IK rubber-banding
+      </div>
+    </div>
+
+    <!-- 3D Studio & Tooling -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="docs.html" class="btn btn-primary">Read the Full Documentation &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin: 0 auto;">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

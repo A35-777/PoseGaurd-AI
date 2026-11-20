@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://poseguard.ai/sitemap.xml
+

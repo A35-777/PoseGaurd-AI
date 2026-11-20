@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — PoseGuard AI</title>
+  <meta name="description" content="Official documentation for PoseGuard AI. Installation guides, CLI commands, Python SDK integration, and REST API schemas.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="docs.html" class="active">Documentation</a>
+        <a href="benchmarks.html">Benchmarks</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-bottom: 3rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">PoseGuard AI Documentation</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        Everything you need to install, configure, script, and deploy PoseGuard AI in your animation pipeline.
+      </p>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1.25rem; border-radius: 8px; margin-bottom: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+      <a href="#installation" style="color: var(--cyan); text-decoration: none; font-weight: 500;">Installation</a>
+      <a href="#cli" style="color: var(--cyan); text-decoration: none; font-weight: 500;">CLI Reference</a>
+      <a href="#sdk" style="color: var(--cyan); text-decoration: none; font-weight: 500;">Python SDK</a>
+      <a href="#api" style="color: var(--cyan); text-decoration: none; font-weight: 500;">REST API</a>
+      <a href="#formats" style="color: var(--cyan); text-decoration: none; font-weight: 500;">Supported Formats</a>
+      <a href="#troubleshooting" style="color: var(--cyan); text-decoration: none; font-weight: 500;">Troubleshooting</a>
+    </div>
+
+    <!-- Installation -->
+    <section id="installation" style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Installation</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        PoseGuard AI requires Python 3.10+ and standard CPU-compatible packages. No NVIDIA GPU or CUDA installation is necessary.
+      </p>
+
+      <h3 style="font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Windows 10 / 11 (Command Prompt)</h3>
+      <pre class="code-box"><code>git clone https://github.com/your-username/poseguard-ai.git
+cd poseguard-ai
+py -3.12 -m venv .venv
+call .venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .</code></pre>
+
+      <h3 style="font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">Linux (Bash)</h3>
+      <pre class="code-box"><code>git clone https://github.com/your-username/poseguard-ai.git
+cd poseguard-ai
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .</code></pre>
+
+      <p style="color: var(--text-dim); font-size: 0.9rem;">
+        Verify installation: Run <code>poseguard info</code> to confirm the 214K parameter model checkpoint loads properly.
+      </p>
+    </section>
+
+    <!-- CLI Reference -->
+    <section id="cli" style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Command Line Interface (`poseguard`)</h2>
+      
+      <h3 style="font-size: 1.1rem; margin-top: 1rem; color: var(--cyan);">1. `poseguard analyze`</h3>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Inspect a single animation sequence and generate a terminal summary, JSON report, or CSV defect table.</p>
+      <pre class="code-box"><code># Terminal summary
+poseguard analyze data\raw\subj_01_walk_clean.bvh
+
+# Export JSON report
+poseguard analyze data\raw\subj_01_walk_clean.bvh --format json --out-file report.json
+
+# Analyze only specific defect categories
+poseguard analyze clip.bvh --filter foot_sliding ground_penetration</code></pre>
+
+      <h3 style="font-size: 1.1rem; margin-top: 1.5rem; color: var(--cyan);">2. `poseguard serve`</h3>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Launch the interactive 3D Web Studio and REST API server.</p>
+      <pre class="code-box"><code>poseguard serve --host 127.0.0.1 --port 8000</code></pre>
+
+      <h3 style="font-size: 1.1rem; margin-top: 1.5rem; color: var(--cyan);">3. `poseguard batch`</h3>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Scan and analyze an entire folder of animation assets for batch production QA.</p>
+      <pre class="code-box"><code>poseguard batch ./animations/ --format text</code></pre>
+
+      <h3 style="font-size: 1.1rem; margin-top: 1.5rem; color: var(--cyan);">4. `poseguard inspect`</h3>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Display skeleton joint hierarchy, bounding boxes, duration, and frame rate without running defect classifiers.</p>
+      <pre class="code-box"><code>poseguard inspect character_run.bvh</code></pre>
+    </section>
+
+    <!-- Python SDK -->
+    <section id="sdk" style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Python SDK Integration</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Integrate PoseGuard AI directly into your Python animation pipelines, Blender addons, or Maya exporters.
+      </p>
+
+      <pre class="code-box"><code>from poseguard import PoseGuard, PoseGuardConfig
+
+# Initialize detector with default CPU model
+detector = PoseGuard()
+
+# Optional: customize thresholds
+custom_config = PoseGuardConfig(
+    slide_velocity_threshold=0.06,  # Stricter sliding bound (m/s)
+    penetration_threshold=0.015     # Stricter floor clipping (m)
+)
+custom_detector = PoseGuard(config=custom_config)
+
+# Run complete analysis
+result = detector.analyze("walk_cycle.bvh")
+
+print(f"Overall Quality Status: {result.quality_summary.overall_status}")
+print(f"Defect-Free Frames: {result.quality_summary.defect_free_frame_percentage:.1f}%")
+
+for defect in result.defects:
+    print(f"[{defect.severity}] {defect.type} on {defect.joint}")
+    print(f"  Frames {defect.start_frame}-{defect.end_frame} ({defect.duration_sec:.2f}s)")
+    print(f"  Confidence: {defect.confidence:.2f} | Status: {defect.verification_status}")
+    print(f"  Action: {defect.suggested_correction}")</code></pre>
+    </section>
+
+    <!-- REST API -->
+    <section id="api" style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">REST API Reference</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        When running <code>poseguard serve</code>, the following endpoints are available at <code>http://127.0.0.1:8000</code>:
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>GET</code></td>
+              <td><code>/api/info</code></td>
+              <td>Returns software version, model parameter counts, RAM usage, and supported defects.</td>
+            </tr>
+            <tr>
+              <td><code>POST</code></td>
+              <td><code>/api/upload</code></td>
+              <td>Multipart form upload of .bvh, .npz, or .npy file. Returns parsed skeleton and 3D preview points.</td>
+            </tr>
+            <tr>
+              <td><code>GET</code></td>
+              <td><code>/api/demo/{name}</code></td>
+              <td>Loads one of the built-in clean or defect sample animations for one-click testing.</td>
+            </tr>
+            <tr>
+              <td><code>POST</code></td>
+              <td><code>/api/analyze</code></td>
+              <td>Executes hybrid defect diagnosis on an active session ID.</td>
+            </tr>
+            <tr>
+              <td><code>GET</code></td>
+              <td><code>/api/export/json/{session_id}</code></td>
+              <td>Downloads complete structured JSON diagnostic report.</td>
+            </tr>
+            <tr>
+              <td><code>GET</code></td>
+              <td><code>/api/export/csv/{session_id}</code></td>
+              <td>Downloads comma-separated defect incident table.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Supported Formats -->
+    <section id="formats" style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Supported Formats</h2>
+      <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
+        <li><strong style="color: var(--text-main);">BioVision Hierarchy (.bvh)</strong>: Pure Python forward kinematics parsing with canonical joint mapping for CMU, Mixamo, and standard biped rigs.</li>
+        <li><strong style="color: var(--text-main);">NumPy Archives (.npz, .npy)</strong>: Ingests 3D Cartesian joint positions arrays of shape <code>[T, J, 3]</code> or dictionary archives containing <code>positions</code>, <code>fps</code>, and <code>joint_names</code>.</li>
+        <li><strong style="color: var(--text-main);">FBX Workflow</strong>: Export FBX sequences to BVH using standard Blender scripts for seamless parsing.</li>
+      </ul>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section id="troubleshooting">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Troubleshooting</h2>
+      <div class="faq-item">
+        <h4>Animation shows elevated ground penetration on clean walk</h4>
+        <p>Ensure the character's ground plane is aligned with \(Y=0.0\). If the animation floor is offset, specify <code>--ground-y &lt;height&gt;</code> in the CLI or set it in the 3D Studio ground plane slider.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Unusual skeleton joint naming causes missing detections</h4>
+        <p>PoseGuard automatically maps common joint names (e.g. <code>LeftUpLeg</code>, <code>l_thigh</code>, <code>LeftLeg</code> &rarr; <code>LeftHip</code>). Check recognized joints with <code>poseguard inspect &lt;file&gt;</code>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin: 0 auto;">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,41 @@
+{
+  "dataset_sources": [
+    {
+      "name": "CMU Graphics Lab Motion Capture Database",
+      "url": "http://mocap.cs.cmu.edu/",
+      "license": "Public Domain / Free for any purpose",
+      "commercial_use_permitted": true,
+      "access_restrictions": "None. Freely downloadable directly from Carnegie Mellon University.",
+      "processing_pipeline": "Parsed into standard BVH hierarchical skeleton, converted to canonical 21-joint representation, normalized to 30 FPS and 1.75m reference height.",
+      "notes": "Widely cited open benchmark dataset containing diverse locomotion, athletic actions, and everyday gestures."
+    },
+    {
+      "name": "HDM05 Motion Capture Database",
+      "url": "http://resources.mpi-inf.mpg.de/HDM05/",
+      "license": "Academic / Non-commercial Research License (MPI Informatik & University of Bonn)",
+      "commercial_use_permitted": false,
+      "access_restrictions": "Research only with attribution.",
+      "processing_pipeline": "Filtered for clean locomotion sequences, resampled to canonical frame rate.",
+      "notes": "High-density optical motion capture data recorded with Vicon system."
+    },
+    {
+      "name": "SFU Motion Capture Database",
+      "url": "https://mocap.cs.sfu.ca/",
+      "license": "Creative Commons / Academic Research Use",
+      "commercial_use_permitted": false,
+      "access_restrictions": "Free academic access.",
+      "processing_pipeline": "Extracted joint angle trajectories and converted to world coordinates.",
+      "notes": "Curated by Simon Fraser University School of Interactive Arts and Technology."
+    },
+    {
+      "name": "PoseGuard Biomechanical Gait Generator (Procedural Reference)",
+      "url": "https://github.com/your-username/poseguard-ai",
+      "license": "Apache 2.0 / Proprietary to Project",
+      "commercial_use_permitted": true,
+      "access_restrictions": "None. Locally generated from biomechanical gait kinematic models (Winter, 2009).",
+      "processing_pipeline": "Synthesizes mathematically clean, ground-truth verified 3D skeletal walk, run, jump, and pivot sequences with zero geometric defects.",
+      "notes": "Used as the pristine ground-truth baseline for controlled synthetic defect injection and benchmark validation."
+    }
+  ]
+}
+

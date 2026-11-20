@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmarks — PoseGuard AI</title>
+  <meta name="description" content="Empirical performance benchmarks for PoseGuard AI on held-out skeletal motion sequences. Accuracy, F1, precision, recall, and CPU latency metrics.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="favicon.svg" alt="PoseGuard AI Logo">
+        <span>PoseGuard AI</span>
+        <span class="beta-badge">Public Beta</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="benchmarks.html" class="active">Benchmarks</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="https://github.com/your-username/poseguard-ai" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-bottom: 3rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Empirical Benchmark Evaluation</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        Rigorous comparative evaluation across deterministic, statistical, neural, and hybrid detection architectures.
+      </p>
+    </div>
+
+    <!-- Methodology Note -->
+    <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;">
+      <h4 style="color: var(--amber); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>⚠️</span> Evaluation Methodology &amp; Data Split Caveat
+      </h4>
+      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
+        The benchmark numbers reported below were measured on an unseen, held-out test split consisting of <strong>84 temporal windows (40 frames each) from the Subject 6 (Pivot Turn) motion family</strong>. The training set strictly excluded all Subject 6 sequences to prevent sequence leakage. While this demonstrates rotational and temporal generalization across sharp turning kinematics, it should <em>not</em> be interpreted as empirical proof of universal generalization across all artistic styles, stylized cartoon rigs, or non-humanoid creatures.
+      </p>
+    </div>
+
+    <!-- 4-Way Architectural Comparison Table -->
+    <section style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">4-Way Architectural Comparison</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Architecture</th>
+              <th>Exact Accuracy</th>
+              <th>Macro F1</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>False Positive Rate</th>
+              <th>Single-Thread CPU Latency</th>
+              <th>Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Deterministic Geometry Baseline</strong></td>
+              <td>27.38%</td>
+              <td>0.4351</td>
+              <td>32.90%</td>
+              <td><strong>76.25%</strong></td>
+              <td>38.75%</td>
+              <td><strong>0.10 ms</strong></td>
+              <td>0.0 MB</td>
+            </tr>
+            <tr>
+              <td><strong>2. Simple Statistical Baseline (Z-Score)</strong></td>
+              <td>17.86%</td>
+              <td>0.1231</td>
+              <td>16.00%</td>
+              <td>10.00%</td>
+              <td>12.50%</td>
+              <td>0.14 ms</td>
+              <td>0.0 MB</td>
+            </tr>
+            <tr>
+              <td><strong>3. Compact Neural Model (PoseGuardNet)</strong></td>
+              <td><strong>82.14%</strong></td>
+              <td><strong>0.7962</strong></td>
+              <td>91.67%</td>
+              <td>72.50%</td>
+              <td><strong>1.98%</strong></td>
+              <td>0.53 ms</td>
+              <td><strong>0.84 MB</strong></td>
+            </tr>
+            <tr>
+              <td><strong>4. Calibrated Hybrid Model (PoseGuard AI)</strong></td>
+              <td><strong>77.38%</strong></td>
+              <td><strong>0.7447</strong></td>
+              <td><strong>92.18%</strong></td>
+              <td>65.00%</td>
+              <td><strong>2.06%</strong></td>
+              <td>0.64 ms</td>
+              <td><strong>0.84 MB</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.5rem;">
+        *Hardware: AMD PRO A12-9800B R7 CPU (4 cores @ 2.7 GHz), 8 GB RAM, PyTorch 2.15.0+cpu, Windows 10 Pro 64-bit.
+      </p>
+    </section>
+
+    <!-- Class-by-Class Breakdown -->
+    <section style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Class-by-Class Breakdown (Calibrated Hybrid Model)</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Defect Category</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F1 Score</th>
+              <th>Primary Diagnostic Indicator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Foot Sliding</strong></td>
+              <td>93.3%</td>
+              <td>79.2%</td>
+              <td><strong>0.8571</strong></td>
+              <td>Horizontal velocity \(v_{xz} > 0.08\text{ m/s}\) during ground contact</td>
+            </tr>
+            <tr>
+              <td><strong>Ground Penetration</strong></td>
+              <td>90.0%</td>
+              <td>75.9%</td>
+              <td><strong>0.8235</strong></td>
+              <td>Floor plane clearance \(Y_{joint} < Y_{ground} - 0.02\text{ m}\)</td>
+            </tr>
+            <tr>
+              <td><strong>Unnatural Pose Transitions</strong></td>
+              <td>92.5%</td>
+              <td>60.0%</td>
+              <td><strong>0.7273</strong></td>
+              <td>Second-derivative acceleration spike \(\|\mathbf{a}\| > 90\text{ m/s}^2\)</td>
+            </tr>
+            <tr>
+              <td><strong>Contact Inconsistency</strong></td>
+              <td>88.9%</td>
+              <td>47.1%</td>
+              <td><strong>0.6154</strong></td>
+              <td>High-frequency flight state chatter &amp; zero-clearance drag</td>
+            </tr>
+            <tr>
+              <td><strong>Bone Stretch Anomalies</strong></td>
+              <td>96.2%</td>
+              <td>54.3%</td>
+              <td><strong>0.7000</strong></td>
+              <td>Non-rigid segment length deviation \(|\Delta L| / L_0 > 0.06\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Why the Hybrid Architecture? -->
+    <section class="card" style="padding: 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Why Combine Neural Temporal Learning with Geometric Calibration?</h3>
+      <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+        Pure deterministic geometry suffers from severe false positive rates (38.75%) on non-linear motions such as sharp pivot turns, where centripetal foot acceleration mimics sliding artifacts. Conversely, unconstrained neural models can hallucinate defects in ambiguous temporal windows.
+      </p>
+      <p style="color: var(--text-muted); line-height: 1.6;">
+        The PoseGuard AI <strong>Calibrated Hybrid Architecture</strong> gates neural defect probabilities against physical geometric boundary tests. If either subsystem flags an anomaly, it is categorized according to confidence level (<em>Confirmed</em> vs <em>Suggested for Review</em>), achieving high precision (<strong>92.18%</strong>) and an exceptionally low false positive rate (<strong>2.06%</strong>) on unseen kinematic turns.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin: 0 auto;">
+      <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
+      <div>v1.0.0-beta</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
