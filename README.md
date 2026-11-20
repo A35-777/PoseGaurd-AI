@@ -65,7 +65,7 @@ PoseGuard AI is a lightweight, hybrid AI and geometric analysis system designed 
 
 ### Option A: Windows (CMD)
 ```cmd
-git clone https://github.com/your-username/poseguard-ai.git
+git clone https://github.com/A35-777/PoseGaurd-AI.git
 cd poseguard-ai
 py -3.12 -m venv .venv
 call .venv\Scripts\activate.bat
@@ -76,7 +76,7 @@ pip install -e .
 
 ### Option B: Linux (Bash)
 ```bash
-git clone https://github.com/your-username/poseguard-ai.git
+git clone https://github.com/A35-777/PoseGaurd-AI.git
 cd poseguard-ai
 python3 -m venv .venv
 source .venv/bin/activate

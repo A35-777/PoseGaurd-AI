@@ -10,7 +10,7 @@ Please review and adhere to [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) when partic
 1. Fork the repository on GitHub.
 2. Clone your fork locally:
    ```cmd
-   git clone https://github.com/your-username/poseguard-ai.git
+   git clone https://github.com/A35-777/PoseGaurd-AI.git
    cd poseguard-ai
    ```
 3. Create and activate a local virtual environment:

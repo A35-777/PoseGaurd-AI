@@ -29,5 +29,5 @@
 - Full Docs: https://poseguard.ai/docs.html
 - Features: https://poseguard.ai/features.html
 - Benchmarks: https://poseguard.ai/benchmarks.html
-- Source Code: https://github.com/your-username/poseguard-ai
+- Source Code: https://github.com/A35-777/PoseGaurd-AI
 

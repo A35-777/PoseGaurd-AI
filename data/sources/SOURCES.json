@@ -29,7 +29,7 @@
     },
     {
       "name": "PoseGuard Biomechanical Gait Generator (Procedural Reference)",
-      "url": "https://github.com/your-username/poseguard-ai",
+      "url": "https://github.com/A35-777/PoseGaurd-AI",
       "license": "Apache 2.0 / Proprietary to Project",
       "commercial_use_permitted": true,
       "access_restrictions": "None. Locally generated from biomechanical gait kinematic models (Winter, 2009).",
