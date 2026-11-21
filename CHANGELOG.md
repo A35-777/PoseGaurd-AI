@@ -3,6 +3,21 @@
 All notable changes to PoseGuard AI are documented here.
 Format adheres to Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.0.1-beta] - 2026-11-21
+
+### Added
+- **Interactive Visual Assets**: Professional 1280x720 architecture pipeline diagram (`docs/images/architecture_diagram.png`), 5-class defect visual breakdown (`docs/images/defect_examples.png`), and high-res 3D studio preview graphics in `docs/images/`.
+- **Pre-Packaged Runnable Examples**: Added `examples/` directory containing sample clean walk BVH, pivot turn BVH, defective foot-sliding NPZ, and corresponding expected JSON audit reports.
+- **GitHub Actions CI Pipeline**: Added automated multi-OS and multi-version test workflow (`.github/workflows/ci.yml`) covering Python 3.10, 3.11, and 3.12.
+- **Code Ownership & Community Governance**: Added `.github/CODEOWNERS`, expanded contributor workflow with test instructions, code style, and PR checklist in `CONTRIBUTING.md`.
+- **Security & Vulnerability Reporting**: Enhanced `SECURITY.md` with structured disclosure pathways and response timelines.
+
+### Changed
+- **README Overhaul**: Added "Why PoseGuard?" value proposition, live demo section with real CLI and Python SDK outputs, roadmap milestones, and status badges.
+- **Model Card Provenance**: Corrected model card authorship to independent open-source research contributors.
+- **Benchmark & Evaluation Protocol**: Expanded `docs/BENCHMARKS.md` with sampling window methodology, held-out Subject 6 zero-leakage protocol, and future multi-dataset evaluation roadmap.
+- **Limitations Transparency**: Enhanced `docs/LIMITATIONS.md` visibility and boundary condition explanations for planar ground and stylized animations.
+
 ## [1.0.0-beta] - 2026-11-19
 
 ### Added

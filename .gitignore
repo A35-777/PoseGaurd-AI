@@ -27,6 +27,7 @@ data/synthetic/
 htmlcov/
 
 # Local cache & temporary files
+scratch/
 *.tmp
 *.log
 .DS_Store
