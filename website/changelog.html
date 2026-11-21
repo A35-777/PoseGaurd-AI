@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="google-site-verification" content="SGokPX2GrobpJD7DfOw4PNA5FjAGcAkZ-196p22EQJU" />
   <meta charset="UTF-8">
@@ -10,13 +11,14 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "zgoiwccd34");
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "zgoiwccd34");
   </script>
 </head>
+
 <body>
 
   <header class="site-header">
@@ -33,7 +35,8 @@
         <a href="benchmarks.html">Benchmarks</a>
         <a href="about.html">About</a>
         <a href="feedback.html">Feedback</a>
-        <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank"
+          rel="noopener">GitHub</a>
       </nav>
     </div>
   </header>
@@ -47,85 +50,126 @@
 
       <!-- v1.0.2-beta -->
       <div class="card" style="margin-bottom: 2.5rem; border-color: var(--cyan);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.2-beta</h2>
             <span class="beta-badge">Latest Release</span>
           </div>
-          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-21</span>
+          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released:
+            2026-11-21</span>
         </div>
 
-        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">⚡ Core Model &amp; Detection Pipeline Upgrade</h4>
+        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">⚡ Core Model &amp; Detection
+          Pipeline Upgrade</h4>
         <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
-          <li><strong>Squeeze-and-Excitation Channel Attention</strong>: Integrated 1D channel recalibration into residual blocks, allowing dynamic weighting of kinematic velocity and stretch signals (235,221 parameters total, strictly &le; 250k).</li>
-          <li><strong>Multi-Scale Feature Fusion</strong>: Fused convolutional temporal summary directly into classification head with BiGRU pooling for sharper transient artifact detection.</li>
-          <li><strong>Benchmark Performance Leap</strong>: On unseen Subject 6 held-out test split, exact accuracy leaped from <strong>75.00% to 91.67%</strong> and Macro F1 jumped to <strong>0.9214</strong> with 97.78% precision, 88.75% recall, and an ultra-low 0.27% FPR.</li>
-          <li><strong>Continuous Soft Contact Kinematics</strong>: Replaced hard binary contact flags with soft contact probability functions, eliminating truncation noise during foot rolls.</li>
-          <li><strong>Stance-Aware Ground Plane Tracking</strong>: Stabilized floor elevation queries by anchoring to stationary stance frames.</li>
+          <li><strong>Squeeze-and-Excitation Channel Attention</strong>: Integrated 1D channel recalibration into
+            residual blocks, allowing dynamic weighting of kinematic velocity and stretch signals (235,221 parameters
+            total, strictly &le; 250k).</li>
+          <li><strong>Multi-Scale Feature Fusion</strong>: Fused convolutional temporal summary directly into
+            classification head with BiGRU pooling for sharper transient artifact detection.</li>
+          <li><strong>Benchmark Performance Leap</strong>: On unseen Subject 6 held-out test split, exact accuracy
+            leaped from <strong>75.00% to 91.67%</strong> and Macro F1 jumped to <strong>0.9214</strong> with 97.78%
+            precision, 88.75% recall, and an ultra-low 0.27% FPR.</li>
+          <li><strong>Continuous Soft Contact Kinematics</strong>: Replaced hard binary contact flags with soft contact
+            probability functions, eliminating truncation noise during foot rolls.</li>
+          <li><strong>Stance-Aware Ground Plane Tracking</strong>: Stabilized floor elevation queries by anchoring to
+            stationary stance frames.</li>
         </ul>
 
-        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://github.com/A35-777/PoseGaurd-AI/releases/tag/v1.0.2-beta" class="btn btn-primary" target="_blank" rel="noopener">Download Release v1.0.2-beta (ZIP)</a>
-          <a href="https://github.com/A35-777/PoseGaurd-AI/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary" target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
+        <div
+          style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/A35-777/PoseGaurd-AI/archive/refs/tags/v1.0.2-beta.zip" class="btn btn-primary"
+            target="_blank" rel="noopener">Download Release v1.0.2-beta (ZIP)</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI/releases/tag/v1.0.2-beta" class="btn btn-secondary"
+            target="_blank" rel="noopener">GitHub Release</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary"
+            target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
           <a href="benchmarks.html" class="btn btn-secondary">View Benchmarks</a>
         </div>
       </div>
 
       <!-- v1.0.1-beta -->
       <div class="card" style="margin-bottom: 2.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.1-beta</h2>
           </div>
-          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-21</span>
+          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released:
+            2026-11-21</span>
         </div>
 
-        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">✨ Professional Open Source Enhancements</h4>
+        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">✨ Professional Open Source
+          Enhancements</h4>
         <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
-          <li><strong>Architecture &amp; Defect Infographics</strong>: High-resolution visual diagrams detailing the hybrid dual-engine pipeline and 5 core defect classes.</li>
-          <li><strong>Runnable Animation Examples</strong>: Pre-packaged BVH and NPZ sample animations with expected JSON audit reports in the repository.</li>
-          <li><strong>Automated CI Testing</strong>: GitHub Actions workflow running full test matrices across Python 3.10–3.12 on Linux and Windows runners.</li>
-          <li><strong>Community Governance</strong>: Added CODEOWNERS file, pull request checklists, code style standards, and responsible security disclosure guidelines.</li>
-          <li><strong>Evaluation &amp; Methodology Depth</strong>: Expanded benchmark documentation with held-out windowing protocols and multi-dataset validation roadmaps.</li>
+          <li><strong>Architecture &amp; Defect Infographics</strong>: High-resolution visual diagrams detailing the
+            hybrid dual-engine pipeline and 5 core defect classes.</li>
+          <li><strong>Runnable Animation Examples</strong>: Pre-packaged BVH and NPZ sample animations with expected
+            JSON audit reports in the repository.</li>
+          <li><strong>Automated CI Testing</strong>: GitHub Actions workflow running full test matrices across Python
+            3.10–3.12 on Linux and Windows runners.</li>
+          <li><strong>Community Governance</strong>: Added CODEOWNERS file, pull request checklists, code style
+            standards, and responsible security disclosure guidelines.</li>
+          <li><strong>Evaluation &amp; Methodology Depth</strong>: Expanded benchmark documentation with held-out
+            windowing protocols and multi-dataset validation roadmaps.</li>
         </ul>
 
         <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <a href="https://github.com/A35-777/PoseGaurd-AI/tree/main/examples" class="btn btn-primary" target="_blank" rel="noopener">Explore Examples</a>
-          <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank" rel="noopener">GitHub Repository</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI/tree/main/examples" class="btn btn-primary" target="_blank"
+            rel="noopener">Explore Examples</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank"
+            rel="noopener">GitHub Repository</a>
         </div>
       </div>
 
       <!-- v1.0.0-beta -->
       <div class="card" style="margin-bottom: 2.5rem; border-color: var(--border);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.0-beta</h2>
-            <span style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 9999px; text-transform: uppercase;">Initial Beta</span>
+            <span
+              style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 9999px; text-transform: uppercase;">Initial
+              Beta</span>
           </div>
-          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-19</span>
+          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released:
+            2026-11-19</span>
         </div>
 
         <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">✨ Major Capabilities</h4>
         <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
-          <li><strong>PoseGuardNet Model</strong>: Lightweight 214,597 parameter Conv1D-Residual-BiGRU network (855 KB checkpoint).</li>
-          <li><strong>5 Defect Detectors</strong>: Automated identification of foot sliding, ground penetration, unnatural pose transitions, contact inconsistency, and bone stretch anomalies.</li>
-          <li><strong>Calibrated Hybrid Engine</strong>: Cross-validates neural temporal defect scores against deterministic geometric boundaries.</li>
-          <li><strong>Interactive 3D Web Studio</strong>: Embedded Three.js skeletal viewer with defect timeline scrub bar and frame-accurate inspection.</li>
-          <li><strong>Multi-Format Ingestion</strong>: Pure-Python forward kinematics BVH parser and standardized NumPy (.npz, .npy) loaders.</li>
-          <li><strong>Headless REST API &amp; CLI</strong>: Automated batch QA via <code>poseguard analyze</code>, <code>batch</code>, <code>inspect</code>, and FastAPI endpoints.</li>
-          <li><strong>100% Offline CPU Execution</strong>: Inferences run in under 0.65 ms on standard multi-core CPUs with zero CUDA requirements.</li>
+          <li><strong>PoseGuardNet Model</strong>: Lightweight 214,597 parameter Conv1D-Residual-BiGRU network (855 KB
+            checkpoint).</li>
+          <li><strong>5 Defect Detectors</strong>: Automated identification of foot sliding, ground penetration,
+            unnatural pose transitions, contact inconsistency, and bone stretch anomalies.</li>
+          <li><strong>Calibrated Hybrid Engine</strong>: Cross-validates neural temporal defect scores against
+            deterministic geometric boundaries.</li>
+          <li><strong>Interactive 3D Web Studio</strong>: Embedded Three.js skeletal viewer with defect timeline scrub
+            bar and frame-accurate inspection.</li>
+          <li><strong>Multi-Format Ingestion</strong>: Pure-Python forward kinematics BVH parser and standardized NumPy
+            (.npz, .npy) loaders.</li>
+          <li><strong>Headless REST API &amp; CLI</strong>: Automated batch QA via <code>poseguard analyze</code>,
+            <code>batch</code>, <code>inspect</code>, and FastAPI endpoints.
+          </li>
+          <li><strong>100% Offline CPU Execution</strong>: Inferences run in under 0.65 ms on standard multi-core CPUs
+            with zero CUDA requirements.</li>
         </ul>
 
         <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">🔒 Security &amp; Hardening</h4>
         <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
           <li>Bounded file uploads to 50 MB to prevent resource exhaustion attacks.</li>
-          <li>Sanitized uploaded filenames using <code>os.path.basename</code> to prevent directory traversal vectors.</li>
+          <li>Sanitized uploaded filenames using <code>os.path.basename</code> to prevent directory traversal vectors.
+          </li>
           <li>Configured localhost-only default network bindings and restricted CORS origins.</li>
         </ul>
 
-        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://github.com/A35-777/PoseGaurd-AI/releases/tag/v1.0.0-beta" class="btn btn-primary" target="_blank" rel="noopener">Download Source Distribution (ZIP)</a>
-          <a href="https://github.com/A35-777/PoseGaurd-AI/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary" target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
+        <div
+          style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/A35-777/PoseGaurd-AI/releases/tag/v1.0.0-beta" class="btn btn-primary"
+            target="_blank" rel="noopener">Download Source Distribution (ZIP)</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary"
+            target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
         </div>
       </div>
     </div>
@@ -139,4 +183,5 @@
   </footer>
 
 </body>
+
 </html>
