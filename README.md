@@ -21,8 +21,8 @@ In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic
 
 ## 📸 Interactive 3D Studio
 
-[![PoseGuard AI Interactive 3D Web Studio](docs/images/studio_preview.png)](https://poseguard-ai.pages.dev/)
-*The embedded WebGL/Three.js studio enables real-time frame scrubbing, skeletal joint trajectory tracking, and automated defect timeline navigation in any browser.*
+[![PoseGuard AI Interactive 3D Web Studio](docs/images/studio_preview.gif)](https://poseguard-ai.pages.dev/)
+*The embedded WebGL/Three.js studio enables real-time frame scrubbing, skeletal joint trajectory tracking, and automated defect timeline navigation in any browser. [Try the Live Web Demo &rarr;](https://poseguard-ai.pages.dev/)*
 
 ---
 

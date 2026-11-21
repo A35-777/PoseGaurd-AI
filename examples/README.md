@@ -57,3 +57,4 @@ for defect in result.defects:
     print(f"- [{defect.severity.upper()}] {defect.type} on {defect.joint} (Frames {defect.start_frame}-{defect.end_frame})")
     print(f"  Fix: {defect.suggested_correction}")
 ```
+
