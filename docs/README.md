@@ -25,6 +25,8 @@ PoseGuard AI identifies five major classes of 3D skeletal animation defects:
 
 ## 🏗️ Hybrid Architecture
 
+![PoseGuard AI Technical Architecture](images/architecture_diagram.png)
+
 PoseGuard AI operates on a three-tiered hybrid architecture that combines deterministic geometric verification with a compact temporal neural classifier:
 
 ```
@@ -172,4 +174,5 @@ Evaluated on the held-out unseen sequence (`subj_06_pivot_turn`, 84 temporal win
 13. [BENCHMARKS.md](BENCHMARKS.md) — Detailed 4-way benchmark comparison and latency metrics.
 14. [CHANGELOG.md](CHANGELOG.md) — Version 1.0.0 release notes and feature changelog.
 15. [FINAL_AUDIT.md](FINAL_AUDIT.md) — Autonomous 16-point independent audit report with empirical verification.
+16. [Runnable Examples & Datasets](../examples/README.md) — Pre-packaged sample animations and expected JSON audit reports.
 

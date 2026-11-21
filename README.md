@@ -1,61 +1,139 @@
 # PoseGuard AI 🛡️
 ### Autonomous 3D Skeletal Animation Motion Defect Analysis System
 
-[![Release](https://img.shields.io/badge/release-v1.0.0--beta-blue.svg)](CHANGELOG.md)
+[![Public Beta](https://img.shields.io/badge/status-Public%20Beta-blue.svg)](https://poseguard-ai.pages.dev/)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](pyproject.toml)
+[![CI](https://github.com/A35-777/PoseGaurd-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/A35-777/PoseGaurd-AI/actions)
+[![Code Style](https://img.shields.io/badge/code%20style-black%20%2F%20ruff-000000.svg)](CONTRIBUTING.md)
 [![Model](https://img.shields.io/badge/model-PoseGuardNet%20(855%20KB)-emerald.svg)](docs/MODEL_CARD.md)
-[![Execution](https://img.shields.io/badge/runtime-100%25%20CPU%20Offline-orange.svg)](docs/BENCHMARKS.md)
+[![Runtime](https://img.shields.io/badge/runtime-100%25%20CPU%20Offline-orange.svg)](docs/BENCHMARKS.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-26%20Passed-brightgreen.svg)](tests/)
 
-> **⚠️ Public Beta Notice**: PoseGuard AI is currently in Public Beta. The system generates advisory kinematic recommendations and automated defect suggestions to accelerate animator review and technical QA pipelines. It is not an automated replacement for human aesthetic direction. Benchmarks reflect held-out test sequences; broader field performance may vary across non-standard character rigs.
-
----
-
-## 📸 Interactive 3D Studio Preview
-
-```
-+-------------------------------------------------------------------------------+
-|  PoseGuard AI 3D Studio                                              [v1.0.0] |
-|  [ Load File ] [ Demo Walk ] [ Demo Pivot Turn ]                              |
-| +-----------------------------------------------+ +-------------------------+ |
-| |                                               | | Defect Breakdown        | |
-| |           [ 3D Skeleton Viewport ]            | | • Foot Sliding: Frame 42| |
-| |                                               | | • Ground Pen: Frame 78  | |
-| |                                               | | Overall: NEEDS_REVIEW   | |
-| +-----------------------------------------------+ +-------------------------+ |
-| |  Timeline: [====|========================] 42/120                           | |
-+-------------------------------------------------------------------------------+
-```
-*(Screenshot placeholder: To display a screenshot or GIF in your fork, place a 1280x720 image at `docs/images/studio_preview.png` and link it here: `![PoseGuard AI 3D Studio](docs/images/studio_preview.png)`)*
+> **⚠️ Public Beta Notice**: PoseGuard AI is currently in Public Beta. The system generates advisory kinematic recommendations and automated defect suggestions to accelerate technical QA pipelines. It is an engineering verification tool, not a unilateral replacement for creative artistic direction.
 
 ---
 
-## 🌟 What PoseGuard AI Does
+## 💡 Why PoseGuard AI?
 
-PoseGuard AI is a lightweight, hybrid AI and geometric analysis system designed to autonomously inspect 3D character animation sequences (.bvh, .npz, .npy) and detect five critical motion defect classes:
+In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic flaws—such as planted feet sliding during contact, limbs sinking beneath the floor, and joint popping from retargeting glitches—frequently slip past automated ingestion checks and are only caught after expensive render passes or live player bug reports. PoseGuard AI solves this right at the source: an ultra-lightweight, **855 KB** dual-engine running **100% offline on standard CPUs at 240+ FPS**. By cross-verifying a compact temporal neural model against exact deterministic rigid-body kinematics, PoseGuard AI achieves a **2.06% false-positive rate**, empowering animators and technical artists with instant, actionable defect alerts without requiring GPU clusters, cloud telemetry, or external API keys.
 
-1. **Foot Sliding**: Detects frames where feet are grounded but drift horizontally ($v_{xz} > \tau_{slide}$).
-2. **Ground Penetration**: Pinpoints frames where joints sink beneath the estimated floor ($Y < Y_{ground} - \tau_{pen}$).
-3. **Unnatural Pose Transitions**: Flags sudden velocity or acceleration spikes ($a > 90 \text{ m/s}^2$) indicative of frame drops, bad retargeting, or joint popping.
-4. **Contact Inconsistency**: Identifies rapid on/off contact state chatter and dragging without vertical clearance.
-5. **Bone Stretch Anomalies**: Enforces anatomical rigid-body kinematic invariance, identifying non-rigid bone expansion or compression ($\Delta L / L_{nominal} > 6\%$).
+---
+
+## 📸 Interactive 3D Studio
+
+[![PoseGuard AI Interactive 3D Web Studio](docs/images/studio_preview.png)](https://poseguard-ai.pages.dev/)
+*The embedded WebGL/Three.js studio enables real-time frame scrubbing, skeletal joint trajectory tracking, and automated defect timeline navigation in any browser.*
+
+---
+
+## 🚀 Live Demo & Quick Walkthrough
+
+- **🌐 Live Production Website & Interactive Tour**: [https://poseguard-ai.pages.dev](https://poseguard-ai.pages.dev/)
+- **📁 Ready-to-Run Sample Animations**: Explore the [`examples/`](examples/) folder for clean and defective motion sequences.
+
+### 1. Command-Line Analysis (CLI)
+Analyze an animation clip in milliseconds with formatted summary diagnostics:
+```bash
+poseguard analyze examples/sample_walk_clean.bvh
+```
+```text
+================================================================================
+ PoseGuard AI — Motion Defect Inspection Report
+ File: examples/sample_walk_clean.bvh | Frames: 120 | FPS: 60.0
+================================================================================
+ Overall Verdict:   [PASS] CLEAN
+ Defect-Free Rate:  100.0%
+ Flagged Defects:   0 total (0 critical, 0 warning)
+ Processing Time:   184 ms (CPU)
+--------------------------------------------------------------------------------
+ No biomechanical defects detected. Sequence is ready for rendering pipeline.
+================================================================================
+```
+
+Audit defective motion and export structured JSON/CSV logs for automated CI/CD gating:
+```bash
+poseguard analyze examples/sample_foot_sliding.npz --format json --out-file audit_report.json
+```
+```text
+================================================================================
+ PoseGuard AI — Motion Defect Inspection Report
+ File: examples/sample_foot_sliding.npz | Frames: 120 | FPS: 60.0
+================================================================================
+ Overall Verdict:   [FAIL] CRITICAL_DEFECTS
+ Defect-Free Rate:  68.3%
+ Flagged Defects:   6 total (6 critical, 0 warning)
+ Processing Time:   142 ms (CPU)
+--------------------------------------------------------------------------------
+ [CRITICAL] Foot Sliding on 'LeftAnkle' (Frames 32–58, conf: 0.94)
+   -> Suggested Fix: Lock root-relative horizontal velocity during stance.
+ [CRITICAL] Foot Sliding on 'RightAnkle' (Frames 84–112, conf: 0.91)
+   -> Suggested Fix: Lock root-relative horizontal velocity during stance.
+--------------------------------------------------------------------------------
+ Full structured report saved to: audit_report.json
+================================================================================
+```
+
+Launch the local interactive 3D Web Studio:
+```bash
+poseguard serve --port 8000
+```
+```text
+[INFO] Starting PoseGuard AI 3D Web Studio on http://127.0.0.1:8000
+[INFO] Loaded checkpoint models/poseguard_v1.pt (855 KB, 214,597 parameters) on CPU
+[INFO] Ready for browser sessions. Open http://localhost:8000 to inspect clips.
+```
+
+### 2. Python Native SDK
+Integrate motion defect verification into custom Python pipelines or DCC scripts:
+```python
+from poseguard import PoseGuard
+
+# Initialize detector (loads 855 KB checkpoint on CPU)
+detector = PoseGuard()
+
+# Analyze animation clip
+result = detector.analyze("examples/sample_foot_sliding.npz")
+
+print(f"Overall Status: {result.quality_summary.overall_status}")
+print(f"Clean Frames: {result.quality_summary.defect_free_frame_percentage:.1f}%")
+
+for defect in result.defects:
+    print(f"[{defect.severity.upper()}] {defect.type} on '{defect.joint}'")
+    print(f"  Frames: {defect.start_frame}–{defect.end_frame} ({defect.duration_sec:.2f}s)")
+    print(f"  Confidence: {defect.confidence:.2f} ({defect.verification_status})")
+    print(f"  Correction: {defect.suggested_correction}")
+```
+
+---
+
+## 🌟 The 5 Detected Defect Classes
+
+![PoseGuard AI 5 Core Skeletal Defect Classes](docs/images/defect_examples.png)
+
+1. **Foot Sliding**: Flags frames where feet are planted on the ground but exhibit horizontal drift ($v_{xz} > \tau_{slide}$).
+2. **Ground Penetration**: Identifies joints sinking beneath the calibrated floor plane ($Y < Y_{ground} - \tau_{pen}$).
+3. **Unnatural Transitions**: Catches sudden acceleration spikes ($a > 90\text{ m/s}^2$) caused by frame drops, bad retargeting, or joint popping.
+4. **Contact Inconsistency**: Detects foot chatter, rapid contact oscillations, and dragging without proper vertical foot clearance.
+5. **Bone Stretch Anomalies**: Enforces rigid-body anatomical invariance, identifying non-rigid bone expansion or compression ($\Delta L / L_{nominal} > 6\%$).
 
 ---
 
 ## 🏗️ Technical Architecture
 
-- **Tiny Neural Classifier (PoseGuardNet)**: 214,597 parameter Conv1D-Residual-BiGRU network requiring only **855 KB** of storage. Operates on 48-channel translation-invariant kinematic features.
-- **Deterministic Geometric Engine**: Exact analytical kinematic verification for contact velocity, ground boundary clearance, and bone length preservation.
-- **Calibrated Hybrid Gating**: Cross-validates neural temporal defect scores against physical geometric bounds to suppress false positives (FPR 2.06%).
-- **100% Offline & CPU-Native**: Inference runs in $< 0.65\text{ ms}$ per temporal window on standard 4-core consumer CPUs without requiring CUDA, GPUs, or external cloud APIs.
+![PoseGuard AI Technical Architecture](docs/images/architecture_diagram.png)
+
+- **Compact Neural Classifier (`PoseGuardNet`)**: 214,597 parameter Conv1D-Residual-BiGRU network requiring only **855 KB** of disk space. Analyzes 48-channel translation-invariant kinematic features.
+- **Deterministic Geometric Engine**: Exact analytical kinematic verification for contact velocity, floor clearance, joint jerk, and bone rigidity.
+- **Calibrated Hybrid Gating**: Fuses neural temporal probability proposals with physical geometric bounds, slashing false-positive rates to **2.06%**.
+- **100% Offline & CPU-Native**: Inference runs in $< 0.65\text{ ms}$ per temporal window on standard 4-core consumer CPUs without requiring CUDA or GPUs.
 
 ---
 
 ## ⚡ System Requirements
 
-- **Operating System**: Windows 10/11 (64-bit) or Linux (Ubuntu 20.04+, Debian 11+, Fedora 38+).
+- **Operating System**: Windows 10/11 (64-bit), macOS (Apple Silicon / Intel), or Linux (Ubuntu 20.04+, Debian 11+).
 - **Python**: Python 3.10, 3.11, or 3.12.
-- **Hardware**: Standard multi-core CPU (tested on AMD PRO A12-9800B @ 2.7 GHz).
+- **Hardware**: Standard multi-core consumer CPU (tested on AMD PRO A12-9800B @ 2.7 GHz).
 - **Memory**: 4 GB RAM minimum (peak process footprint $< 280\text{ MB}$).
 - **Storage**: Under 25 MB disk space total (including model checkpoint and dependencies).
 
@@ -63,10 +141,10 @@ PoseGuard AI is a lightweight, hybrid AI and geometric analysis system designed 
 
 ## 🚀 Installation
 
-### Option A: Windows (CMD)
+### Option A: Windows
 ```cmd
 git clone https://github.com/A35-777/PoseGaurd-AI.git
-cd poseguard-ai
+cd PoseGaurd-AI
 py -3.12 -m venv .venv
 call .venv\Scripts\activate.bat
 python -m pip install --upgrade pip
@@ -74,10 +152,10 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-### Option B: Linux (Bash)
+### Option B: Linux & macOS
 ```bash
 git clone https://github.com/A35-777/PoseGaurd-AI.git
-cd poseguard-ai
+cd PoseGaurd-AI
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
@@ -87,54 +165,9 @@ pip install -e .
 
 ---
 
-## 💻 Quick Start & Usage
-
-### 1. Launch Interactive 3D Web Studio
-```cmd
-poseguard serve --host 127.0.0.1 --port 8000
-```
-Open **`http://127.0.0.1:8000`** in any modern web browser to load files, inspect skeletons in 3D, and scrub the defect timeline.
-
-### 2. CLI Analysis
-```cmd
-poseguard analyze data\raw\subj_01_walk_clean.bvh
-```
-Export structured reports in JSON or CSV format:
-```cmd
-poseguard analyze data\raw\subj_01_walk_clean.bvh --format json --out-file report.json
-poseguard analyze data\raw\subj_01_walk_clean.bvh --format csv --out-file defects.csv
-```
-
-Batch analyze an entire directory of animations:
-```cmd
-poseguard batch data\raw --format text
-```
-
-### 3. Python SDK
-```python
-from poseguard import PoseGuard
-
-# Initialize detector (loads 855 KB checkpoint on CPU)
-detector = PoseGuard()
-
-# Analyze animation clip
-result = detector.analyze("data/raw/subj_01_walk_clean.bvh")
-
-print(f"Overall Status: {result.quality_summary.overall_status}")
-print(f"Defect-Free Frames: {result.quality_summary.defect_free_frame_percentage:.1f}%")
-
-for defect in result.defects:
-    print(f"[{defect.severity.upper()}] {defect.type} on joint '{defect.joint}'")
-    print(f"  Frames: {defect.start_frame} - {defect.end_frame} ({defect.duration_sec:.2f}s)")
-    print(f"  Confidence: {defect.confidence:.2f} ({defect.verification_status})")
-    print(f"  Correction: {defect.suggested_correction}")
-```
-
----
-
 ## 📊 Benchmark Evaluation
 
-The benchmark below compares the 4 diagnostic approaches on an unseen, held-out test motion sequence (`subj_06_pivot_turn`, 84 temporal windows):
+The benchmark below compares four diagnostic approaches evaluated on an unseen, held-out test motion sequence (`subj_06_pivot_turn`, 84 temporal windows):
 
 | Model Architecture | Exact Accuracy | Macro F1 | Precision | Recall | CPU Latency | Checkpoint Size |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -143,34 +176,55 @@ The benchmark below compares the 4 diagnostic approaches on an unseen, held-out 
 | **Compact Neural Model (PoseGuardNet)** | **82.14%** | **0.7962** | 91.67% | 72.50% | 0.53 ms | **855 KB** |
 | **Calibrated Hybrid Model (PoseGuard AI)** | **77.38%** | **0.7447** | **92.18%** | 65.00% | 0.64 ms | **855 KB** |
 
-*Note on Evaluation: The reported benchmark strictly represents performance on the held-out Subject 6 (Pivot Turn) motion family with zero sequence leakage. It demonstrates temporal generalization across sharp turning kinematics rather than universal validation across all commercial game rigs.*
+*Methodology Note: The benchmark reflects strict sequence-level segregation on Subject 6 (Pivot Turn) with zero data leakage. It measures non-linear temporal generalization rather than memorization. Full details in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).*
+
+---
+
+## 🗺️ Roadmap
+
+The planned engineering milestones leading up to production v1.0.0 include:
+
+- [ ] **Headless FBX Ingestion**: Direct parsing of binary FBX animation clips without manual Blender BVH export.
+- [ ] **Raycasted Non-Planar Terrain**: Floor boundary tracking over sloped ground, stairs, and dynamic heightmaps.
+- [ ] **Blender & Unreal Engine 5 Add-ons**: Viewport timeline defect markers and scrubbing directly inside DCC tools.
+- [ ] **Multi-Rig Joint Topology Presets**: Out-of-the-box remapping profiles for Mixamo, UE5 Mannequin, and custom rigs.
+
+---
+
+## ⚠️ Known Limitations
+
+PoseGuard AI is built on honest, transparent engineering. Before deploying in production, please review [docs/LIMITATIONS.md](docs/LIMITATIONS.md) regarding:
+- **Planar Ground Assumptions**: Automatic floor estimation expects horizontal reference planes.
+- **Stylized Animations**: Extreme squash-and-stretch cartoon rigs require widening bone tolerance thresholds.
+- **Humanoid Focus**: Canonical remapper supports bipedal humanoid skeletons; quadruped creature rigs require custom mappings.
 
 ---
 
 ## 🛡️ Privacy & Security
 
-- **100% Offline**: No network calls, telemetry, or remote analytics.
-- **Localhost Only**: Web server binds by default to `127.0.0.1:8000`.
-- **Zero Cloud Dependence**: Everything from parsing to neural inference executes in-process on CPU.
+- **100% Offline**: No network calls, cloud telemetry, or remote analytics.
+- **Localhost Binding**: Embedded studio server binds strictly to `127.0.0.1:8000`.
+- **Zero Cloud Dependence**: Parsing, geometric validation, and neural inference execute entirely in-process on CPU.
+- Review our [Security Policy](SECURITY.md) and [Privacy Notice](PRIVACY.md).
 
 ---
 
-## 📖 Documentation & Community
+## 📖 Documentation Index
 
-- [Changelog](CHANGELOG.md)
-- [Contributing Guide](CONTRIBUTING.md)
-- [Security Policy](SECURITY.md)
-- [Privacy Notice](PRIVACY.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Citation Guide](CITATION.cff)
-- [Full Documentation Index](docs/README.md)
+- [Full Documentation Portal](docs/README.md)
   - [Installation Guide](docs/INSTALLATION.md)
-  - [Model Card](docs/MODEL_CARD.md)
-  - [Dataset Card](docs/DATASET_CARD.md)
-  - [CLI Reference](docs/CLI_GUIDE.md)
-  - [SDK Reference](docs/SDK_GUIDE.md)
-  - [API Reference](docs/API.md)
-  - [Known Limitations](docs/LIMITATIONS.md)
+  - [Model Card (`poseguard-tiny-v1`)](docs/MODEL_CARD.md)
+  - [Dataset Card & Generation](docs/DATASET_CARD.md)
+  - [Comprehensive Benchmark Report](docs/BENCHMARKS.md)
+  - [Known Limitations & Boundary Conditions](docs/LIMITATIONS.md)
+  - [CLI Reference Guide](docs/CLI_GUIDE.md)
+  - [Python SDK Reference](docs/SDK_GUIDE.md)
+  - [FastAPI REST API Schema](docs/API.md)
+- [Runnable Animation Examples](examples/README.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Changelog](CHANGELOG.md)
+- [Citation Information](CITATION.cff)
 
 ---
 
