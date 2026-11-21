@@ -62,5 +62,39 @@ This document reports empirical benchmarks comparing four defect detection appro
 - **Throughput**: ~1,880 windows/second (CPU only)
 - **120-Frame BVH Analysis Time**: **215.2 ms** (over 550 frames/second processing rate)
 - **Peak Process RAM**: **278.5 MB**
-- **Model Checkpoint Size**: **0.835 MB**
+- **Model Checkpoint Size**: **855 KB**
+
+---
+
+## 5. Evaluation Methodology Note
+
+### Window Sampling Protocol
+- Motion sequences are resampled to a standardized **60.0 FPS** prior to temporal slicing.
+- Evaluation runs across overlapping **64-frame windows** (~1.07 seconds of motion) sampled at a **16-frame stride** (~0.27s temporal step).
+- Translation invariance is enforced by centering the root joint $(X, Z)$ at the beginning of each temporal window, isolating intrinsic skeletal dynamics from global world-space navigation.
+
+### Split Rigor & Zero Data Leakage
+- Benchmarks reflect strict sequence-level segregation: **Subject 6 (`subj_06_pivot_turn`)** was completely withheld from training and hyperparameter selection.
+- Because pivot turns exhibit non-linear tangential acceleration and rolling foot contacts, this split specifically measures out-of-distribution temporal generalization rather than repetitive straight-line memorization.
+
+### Advisory Metric Interpretation
+- The hybrid architecture deliberately prioritizes **high precision (92.18%)** over uncalibrated recall. In real-world animation QA pipelines, high false-positive rates erode animator trust; PoseGuard AI is tuned to ensure flagged defects are physically actionable.
+- Defect verdicts are strictly advisory and intended to accelerate human inspection rather than unilaterally override creative directorial intent.
+
+---
+
+## 6. Future Evaluation Plans
+
+As PoseGuard AI evolves toward production `v1.0.0`, the evaluation suite is scheduled to expand across the following dimensions:
+
+1. **Multi-Dataset Cross-Validation**:
+   - Benchmarking across public MoCap repositories including CMU Graphics Lab, Human3.6M, and HDM05 to quantify generalization across diverse capture hardware.
+2. **Variable Frame-Rate Robustness**:
+   - Formal evaluation on 24 FPS (film cinematic standard), 30 FPS, and 120 FPS high-speed athletic sequences.
+3. **Non-Planar Uneven Terrain**:
+   - Incorporating raycast elevation queries to benchmark stair climbing, ramps, and procedurally generated heightmaps.
+4. **Non-Standard Skeletal Topology**:
+   - Evaluating canonical remapper fidelity across asymmetric and multi-bone humanoid game rigs (e.g. Unreal Engine 5 Mannequin, Mixamo, Unity Mecanim).
+5. **Direct FBX Pipeline Integration**:
+   - Developing an open-source headless FBX-to-BVH conversion bridge to streamline ingest directly from DCC tools without manual export steps.
 

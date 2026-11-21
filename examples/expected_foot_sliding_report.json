@@ -1,0 +1,197 @@
+{
+  "status": "defects_detected",
+  "file_path": "D:\\Tiny AI Models\\PoseGuard AI\\examples\\sample_foot_sliding.npz",
+  "num_frames": 120,
+  "fps": 30.0,
+  "duration_seconds": 4.0,
+  "num_joints": 21,
+  "ground_y_used": 0.0173,
+  "quality_summary": {
+    "overall_status": "critical_defects",
+    "total_defects": 6,
+    "defect_counts_by_type": {
+      "foot_sliding": 2,
+      "bone_stretch_anomaly": 2,
+      "unnatural_pose_transition": 2
+    },
+    "defect_counts_by_severity": {
+      "high": 2,
+      "medium": 1,
+      "critical": 3
+    },
+    "defect_free_frame_percentage": 65.0
+  },
+  "defects": [
+    {
+      "type": "foot_sliding",
+      "joint": "LeftFoot",
+      "start_frame": 37,
+      "end_frame": 45,
+      "duration_frames": 9,
+      "duration_sec": 0.3,
+      "severity": "high",
+      "confidence": 0.558,
+      "geometric_evidence": {
+        "max_slide_speed_mps": 0.434,
+        "mean_slide_speed_mps": 0.3488,
+        "total_slide_distance_m": 0.1046,
+        "foot_height_above_ground_m": 0.0116,
+        "ground_y": 0.0173
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.244,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Lock LeftFoot world transform or apply Inverse Kinematics (IK) pinning between frames 37 and 45.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    },
+    {
+      "type": "bone_stretch_anomaly",
+      "joint": "LeftLeg->LeftFoot",
+      "start_frame": 47,
+      "end_frame": 52,
+      "duration_frames": 6,
+      "duration_sec": 0.2,
+      "severity": "medium",
+      "confidence": 0.445,
+      "geometric_evidence": {
+        "max_stretch_percent": 13.78,
+        "mean_stretch_percent": 10.74,
+        "nominal_bone_length_m": 0.462,
+        "max_measured_length_m": 0.4303
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.015,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Enforce rigid length constraint on bone segment 'LeftLeg->LeftFoot' to maintain constant 46.2 cm length.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    },
+    {
+      "type": "bone_stretch_anomaly",
+      "joint": "LeftLeg->LeftFoot",
+      "start_frame": 54,
+      "end_frame": 77,
+      "duration_frames": 24,
+      "duration_sec": 0.8,
+      "severity": "critical",
+      "confidence": 0.549,
+      "geometric_evidence": {
+        "max_stretch_percent": 47.51,
+        "mean_stretch_percent": 34.76,
+        "nominal_bone_length_m": 0.462,
+        "max_measured_length_m": 0.6815
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.01,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Enforce rigid length constraint on bone segment 'LeftLeg->LeftFoot' to maintain constant 46.2 cm length.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    },
+    {
+      "type": "foot_sliding",
+      "joint": "LeftFoot",
+      "start_frame": 67,
+      "end_frame": 75,
+      "duration_frames": 9,
+      "duration_sec": 0.3,
+      "severity": "high",
+      "confidence": 0.866,
+      "geometric_evidence": {
+        "max_slide_speed_mps": 0.434,
+        "mean_slide_speed_mps": 0.3488,
+        "total_slide_distance_m": 0.1046,
+        "foot_height_above_ground_m": 0.0116,
+        "ground_y": 0.0173
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.929,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Lock LeftFoot world transform or apply Inverse Kinematics (IK) pinning between frames 67 and 75.",
+      "verification_status": "verified_by_both",
+      "is_uncertain": false
+    },
+    {
+      "type": "unnatural_pose_transition",
+      "joint": "LeftFoot",
+      "start_frame": 75,
+      "end_frame": 80,
+      "duration_frames": 6,
+      "duration_sec": 0.2,
+      "severity": "critical",
+      "confidence": 0.453,
+      "geometric_evidence": {
+        "peak_acceleration_mps2": 142.77,
+        "peak_jerk_mps3": 3791.92,
+        "threshold_mps2": 90.0
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.002,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Apply trajectory smoothing / spherical linear interpolation (Slerp) on LeftFoot between frames 75 and 80.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    },
+    {
+      "type": "unnatural_pose_transition",
+      "joint": "LeftToeBase",
+      "start_frame": 75,
+      "end_frame": 80,
+      "duration_frames": 6,
+      "duration_sec": 0.2,
+      "severity": "critical",
+      "confidence": 0.453,
+      "geometric_evidence": {
+        "peak_acceleration_mps2": 142.77,
+        "peak_jerk_mps3": 3791.93,
+        "threshold_mps2": 90.0
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.002,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Apply trajectory smoothing / spherical linear interpolation (Slerp) on LeftToeBase between frames 75 and 80.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    }
+  ],
+  "uncertain_findings": [],
+  "metadata": {
+    "model_version": "poseguard-tiny-v1",
+    "model_available": true,
+    "clip_metadata": {
+      "source": "PoseGuard Procedural Biomechanical Generator",
+      "motion_type": "walk",
+      "subject_id": "subj_01",
+      "is_clean_ground_truth": true,
+      "is_synthetic_defect": true,
+      "defect_labels": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "defect_metadata": {
+        "type": "foot_sliding",
+        "severity": "medium",
+        "is_synthetic": true,
+        "start_frame": 36,
+        "end_frame": 78,
+        "slide_speed_mps": 0.35,
+        "target_joint": "LeftFoot"
+      },
+      "mapped_canonical_joints": 21,
+      "total_canonical_joints": 21,
+      "height_scale_factor": 1.1551154851913452,
+      "original_measured_height": 1.5149999856948853,
+      "estimated_ground_y": 0.01732671447098255
+    }
+  }
+}

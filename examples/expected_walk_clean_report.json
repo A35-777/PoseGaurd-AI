@@ -1,0 +1,32 @@
+{
+  "status": "clean",
+  "file_path": "D:\\Tiny AI Models\\PoseGuard AI\\examples\\sample_walk_clean.bvh",
+  "num_frames": 120,
+  "fps": 30.000300003000028,
+  "duration_seconds": 4.0,
+  "num_joints": 21,
+  "ground_y_used": -0.1298,
+  "quality_summary": {
+    "overall_status": "clean",
+    "total_defects": 0,
+    "defect_counts_by_type": {},
+    "defect_counts_by_severity": {},
+    "defect_free_frame_percentage": 100.0
+  },
+  "defects": [],
+  "uncertain_findings": [],
+  "metadata": {
+    "model_version": "poseguard-tiny-v1",
+    "model_available": true,
+    "clip_metadata": {
+      "source_file": "D:\\Tiny AI Models\\PoseGuard AI\\examples\\sample_walk_clean.bvh",
+      "scale_applied": 1.0,
+      "channel_count": 66,
+      "mapped_canonical_joints": 21,
+      "total_canonical_joints": 21,
+      "height_scale_factor": 1.0873996019363403,
+      "original_measured_height": 1.6093440055847168,
+      "estimated_ground_y": -0.12977460026741028
+    }
+  }
+}
