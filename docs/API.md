@@ -18,7 +18,7 @@ Returns runtime hardware statistics, loaded model metadata, and supported defect
 **Example Response**:
 ```json
 {
-  "app_version": "1.0.0",
+  "app_version": "1.0.2",
   "model_version": "poseguard-tiny-v1",
   "offline_mode": true,
   "supported_defects": [
@@ -35,8 +35,8 @@ Returns runtime hardware statistics, loaded model metadata, and supported defect
   "ram_percent": 90.2,
   "model_info": {
     "model_version": "poseguard-tiny-v1",
-    "parameter_count": 214597,
-    "model_file_size_mb": 0.835
+    "parameter_count": 235221,
+    "model_file_size_mb": 0.915
   }
 }
 ```

@@ -12,7 +12,7 @@
 
 This independent audit confirms that **PoseGuard AI** has been autonomously researched, engineered, trained, evaluated, and packaged into a complete, functioning, and documented product.
 
-No pretrained foundation models or AI API wrappers were downloaded or renamed. The model was trained from scratch using initialized weights on host CPU hardware in 73.58 seconds. The model checkpoint weighs 0.835 MB (855 KB), completely satisfying the 1–15 MB constraint. All 26 automated unit and integration tests pass, and zero data leakage was verified across sequence-partitioned splits.
+No pretrained foundation models or AI API wrappers were downloaded or renamed. The model was trained from scratch using initialized weights on host CPU hardware in 132.0 seconds. The model checkpoint weighs 0.915 MB (941 KB), completely satisfying the 1–15 MB constraint. All 26 automated unit and integration tests pass, and zero data leakage was verified across sequence-partitioned splits.
 
 ---
 
@@ -32,9 +32,9 @@ No pretrained foundation models or AI API wrappers were downloaded or renamed. T
 ### Criterion 2: Saved Model is the Actual Trained Model
 - **Requirement**: Saved weights file corresponds to the trained architecture.
 - **Empirical Evidence**:
-  - Checkpoint file: `models/poseguard_v1.pt` (Size: 855,142 bytes = **0.835 MB**).
+  - Checkpoint file: `models/poseguard_v1.pt` (Size: 959,837 bytes = **0.915 MB**).
   - Metadata file: `models/poseguard_v1_meta.json`.
-  - Total Trainable Parameters: **214,597**.
+  - Total Trainable Parameters: **235,221**.
   - Verified loading into `PoseGuardNet` via PyTorch `state_dict`. Verified forward pass generates non-trivial dynamic floating-point probabilities (`x_test` produces distinct multi-label outputs for different input motions).
 - **Audit Status**: **VERIFIED**
 

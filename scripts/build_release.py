@@ -1,4 +1,4 @@
-"""Release packaging script for PoseGuard AI v1.0.0-beta.
+"""Release packaging script for PoseGuard AI v1.0.2-beta.
 Builds the official source distribution ZIP, generates SHA-256 checksums,
 and outputs a complete release manifest.
 """
@@ -12,14 +12,15 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = ROOT_DIR / "dist"
-ARCHIVE_NAME = "poseguard-ai-1.0.0-beta.zip"
+ARCHIVE_NAME = "poseguard-ai-1.0.2-beta.zip"
+ARCHIVE_PREFIX = "poseguard-ai-1.0.2-beta"
 ARCHIVE_PATH = DIST_DIR / ARCHIVE_NAME
 CHECKSUM_PATH = DIST_DIR / f"{ARCHIVE_NAME}.sha256"
 MANIFEST_PATH = ROOT_DIR / "RELEASE_MANIFEST.json"
 
 EXCLUDE_DIRS = {
     ".venv", "venv", "__pycache__", ".pytest_cache", ".git", ".github",
-    "dist", "build", "poseguard.egg-info", "synthetic", "processed"
+    "dist", "build", "poseguard.egg-info", "synthetic", "processed", "scratch"
 }
 
 EXCLUDE_EXTENSIONS = {
@@ -30,6 +31,7 @@ EXCLUDE_EXTENSIONS = {
 INCLUDED_ROOT_FILES = [
     "README.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md",
     "SECURITY.md", "PRIVACY.md", "CODE_OF_CONDUCT.md", "CITATION.cff",
+    "RELEASE_NOTES_v1.0.2-beta.md", "RELEASE_CHECKLIST.md",
     "pyproject.toml", "setup.py", "requirements.txt", "requirements-dev.txt"
 ]
 
@@ -37,7 +39,8 @@ INCLUDED_DIRS = [
     "poseguard",
     "models",
     Path("data") / "raw",
-    "docs"
+    "docs",
+    "examples"
 ]
 
 def compute_sha256(file_path: Path) -> str:
@@ -61,7 +64,7 @@ def build_release():
         for filename in INCLUDED_ROOT_FILES:
             src_file = ROOT_DIR / filename
             if src_file.exists():
-                arcname = f"poseguard-ai-1.0.0-beta/{filename}"
+                arcname = f"{ARCHIVE_PREFIX}/{filename}"
                 zipf.write(src_file, arcname)
                 f_hash = compute_sha256(src_file)
                 f_size = src_file.stat().st_size
@@ -87,7 +90,7 @@ def build_release():
                         continue
                     full_p = Path(root) / file
                     rel_to_root = full_p.relative_to(ROOT_DIR)
-                    arcname = f"poseguard-ai-1.0.0-beta/{rel_to_root.as_posix()}"
+                    arcname = f"{ARCHIVE_PREFIX}/{rel_to_root.as_posix()}"
                     zipf.write(full_p, arcname)
                     f_hash = compute_sha256(full_p)
                     f_size = full_p.stat().st_size
@@ -104,10 +107,11 @@ def build_release():
     with open(CHECKSUM_PATH, "w") as f:
         f.write(f"{archive_sha256}  {ARCHIVE_NAME}\n")
         
+    model_path = ROOT_DIR / "models" / "poseguard_v1.pt"
     manifest = {
-        "release": "PoseGuard AI v1.0.0-beta",
-        "version": "1.0.0-beta",
-        "date": "2026-11-19",
+        "release": "PoseGuard AI v1.0.2-beta",
+        "version": "1.0.2-beta",
+        "date": "2026-11-21",
         "archive_filename": ARCHIVE_NAME,
         "archive_size_bytes": archive_size,
         "archive_size_mb": round(archive_size / (1024 * 1024), 3),
@@ -115,9 +119,9 @@ def build_release():
         "total_packaged_files": len(manifest_entries),
         "model_checkpoint": {
             "name": "poseguard_v1.pt",
-            "size_bytes": (ROOT_DIR / "models" / "poseguard_v1.pt").stat().st_size,
-            "sha256": compute_sha256(ROOT_DIR / "models" / "poseguard_v1.pt"),
-            "parameters": 214597
+            "size_bytes": model_path.stat().st_size if model_path.exists() else 0,
+            "sha256": compute_sha256(model_path) if model_path.exists() else "",
+            "parameters": 235221
         },
         "files": manifest_entries
     }
@@ -136,4 +140,5 @@ def build_release():
 
 if __name__ == "__main__":
     build_release()
+
 

@@ -80,7 +80,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container" style="padding-top: 1rem; padding-bottom: 1.5rem;">
-        <span class="beta-badge" style="margin-bottom: 1.25rem; display: inline-block;">v1.0.0 Public Beta | 100% Offline &amp; CPU-Native</span>
+        <span class="beta-badge" style="margin-bottom: 1.25rem; display: inline-block;">v1.0.2 Public Beta | 100% Offline &amp; CPU-Native</span>
         <h1>Find the flaws hidden in your <br><span class="gradient">3D skeletal animations.</span></h1>
         <p class="lead">
           PoseGuard AI catches hidden motion defects in your 3D skeletal animations before final rendering.
@@ -93,7 +93,7 @@
         </div>
 
         <div class="hero-actions">
-          <a href="docs.html#quick-start" class="btn btn-primary">Download PoseGuard v1.0.0</a>
+          <a href="docs.html#quick-start" class="btn btn-primary">Download PoseGuard v1.0.2</a>
           <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank" rel="noopener">Explore on GitHub</a>
         </div>
 
@@ -113,7 +113,7 @@
           </div>
           <div class="trust-badge-item">
             <span class="trust-badge-dot"></span>
-            <span>CPU-Native (214K Params)</span>
+            <span>CPU-Native (235K Params)</span>
           </div>
         </div>
 
@@ -129,12 +129,11 @@
             <span style="font-size: 0.7rem; color: var(--cyan); font-family: var(--font-mono);">LIVE SCRUBBER</span>
           </div>
           <div class="hero-showcase-media">
-            <!-- TODO: Replace placeholder animated capture with final screen-captured video/GIF of Three.js studio (1200x675 or 1920x1080) -->
             <img src="img/studio-preview.gif" alt="PoseGuard AI Interactive 3D Studio scrubbing BVH skeleton animation with defect timeline" width="960" height="540">
           </div>
           <div class="hero-showcase-caption">
             <span><strong>Real-time 3D Viewport:</strong> Kinematic skeleton scrubbing with active foot-sliding and ground-penetration defect overlays.</span>
-            <span style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.75rem;">Model: PoseGuardNet (855 KB)</span>
+            <span style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.75rem;">Model: PoseGuardNet (941 KB)</span>
           </div>
         </div>
 
@@ -153,7 +152,7 @@
 ================================================================================
 File: subj_01_walk_clean.bvh | Frames: 120 | FPS: 60.0 | Duration: 2.00s
 Overall Status: <span style="color:#22c55e; font-weight:bold;">CLEAN</span> | Defect-Free Frames: 100.0% | Total Defects: 0
-Model: PoseGuardNet (214,597 params, 855 KB) | Execution: 100% Offline CPU (0.64 ms/win)
+Model: PoseGuardNet (235,221 params, 941 KB) | Execution: 100% Offline CPU (0.71 ms/win)
 --------------------------------------------------------------------------------
 No biomechanical defects detected. Animation meets physical motion thresholds.
           </div>
@@ -340,7 +339,7 @@ No biomechanical defects detected. Animation meets physical motion thresholds.
             *Compact 941 KB trained PyTorch checkpoint designed for local single-core CPU execution without GPU or cloud dependencies.
           </p>
           <ul style="color: var(--text-muted); list-style: square; padding-left: 1.25rem; line-height: 1.8;">
-            <li><strong style="color: var(--text-main);">0.74 ms Latency</strong>: Real-time analysis on standard multi-core consumer CPUs.</li>
+            <li><strong style="color: var(--text-main);">0.71 ms Latency</strong>: Real-time analysis on standard multi-core consumer CPUs.</li>
             <li><strong style="color: var(--text-main);">Zero Sequence Overlap</strong>: Evaluated on held-out subject kinematics.</li>
             <li><strong style="color: var(--text-main);">100% Offline Privacy</strong>: Your character rigs and proprietary animations never leave your machine.</li>
           </ul>
@@ -475,7 +474,7 @@ result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
         <details class="faq-item">
           <summary>What does "Public Beta" mean for this release?</summary>
           <div class="faq-content">
-            <p>PoseGuard AI v1.0.0-beta provides robust automated defect recommendations based on geometric and neural analysis. It is completely free and open source during the public beta phase. It is an advisory diagnostic aid for animators and QA teams, not an absolute substitute for human artistic judgment.</p>
+            <p>PoseGuard AI v1.0.2-beta provides robust automated defect recommendations based on geometric and neural analysis. It is completely free and open source during the public beta phase. It is an advisory diagnostic aid for animators and QA teams, not an absolute substitute for human artistic judgment.</p>
           </div>
         </details>
 
@@ -527,7 +526,7 @@ result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
     </div>
     <div class="footer-bottom">
       <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
-      <div>v1.0.0-beta | 100% Offline Local Architecture</div>
+      <div>v1.0.2-beta | 100% Offline Local Architecture</div>
     </div>
   </footer>
 

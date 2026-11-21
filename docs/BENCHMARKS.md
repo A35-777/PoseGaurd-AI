@@ -62,7 +62,7 @@ This document reports empirical benchmarks comparing four defect detection appro
 - **Throughput**: ~1,880 windows/second (CPU only)
 - **120-Frame BVH Analysis Time**: **215.2 ms** (over 550 frames/second processing rate)
 - **Peak Process RAM**: **278.5 MB**
-- **Model Checkpoint Size**: **855 KB**
+- **Model Checkpoint Size**: **941 KB (0.915 MB)**
 
 ---
 

@@ -1,10 +1,10 @@
-# PoseGuard AI v1.0.0-beta — Release Checklist & Audit Record
+# PoseGuard AI v1.0.2-beta — Release Checklist & Audit Record
 
-**Release Date**: 2026-11-19  
-**Version**: `1.0.0-beta`  
-**Distribution Archive**: `dist/poseguard-ai-1.0.0-beta.zip` (1,258,017 bytes / 1.20 MB)  
-**SHA-256 Checksum**: `eaeeaaa7b259fdbdd02d73eefa89d392147e422ac1bb276ceeec64784a797a51`  
-**Model Checkpoint**: `models/poseguard_v1.pt` (875,797 bytes / 0.835 MB, 214,597 parameters)
+**Release Date**: 2026-11-21  
+**Version**: `1.0.2-beta`  
+**Distribution Archive**: `dist/poseguard-ai-1.0.2-beta.zip` (1,767,785 bytes / 1.69 MB)  
+**SHA-256 Checksum**: `7b018785c8bade63f54349ab29a5bd5a31396653f3347ffc2c6dc963aa0ea40d`  
+**Model Checkpoint**: `models/poseguard_v1.pt` (959,837 bytes / 0.915 MB, 235,221 parameters)
 
 ---
 
@@ -26,13 +26,14 @@
 ---
 
 ## 2. Release Engineering (Phase 2)
-- [x] Clean source distribution ZIP generated: `dist/poseguard-ai-1.0.0-beta.zip`.
+- [x] Clean source distribution ZIP generated: `dist/poseguard-ai-1.0.2-beta.zip`.
 - [x] Model weights (`models/poseguard_v1.pt`) bundled inside release archive.
-- [x] Sample clean BVH and NPZ demo files bundled under `data/raw/`.
-- [x] Checksum file generated: `dist/poseguard-ai-1.0.0-beta.zip.sha256`.
+- [x] Sample clean BVH and NPZ demo files bundled under `examples/` and `data/raw/`.
+- [x] Checksum file generated: `dist/poseguard-ai-1.0.2-beta.zip.sha256`.
 - [x] Comprehensive `RELEASE_MANIFEST.json` generated containing per-file SHA-256 hashes and sizes.
 - [x] Exclusions enforced: `.venv`, `__pycache__`, `.pytest_cache`, synthetic/processed cache directories, local debug logs.
-- [x] Complete `CHANGELOG.md` created at repository root.
+- [x] Complete `CHANGELOG.md` updated at repository root.
+- [x] `RELEASE_NOTES_v1.0.2-beta.md` created with empirical metrics and architectural details.
 
 ---
 

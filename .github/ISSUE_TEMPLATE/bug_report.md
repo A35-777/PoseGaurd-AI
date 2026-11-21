@@ -23,7 +23,7 @@ Steps to reproduce the behavior:
 **Environment:**
 - OS: [e.g. Windows 10, Ubuntu 22.04]
 - Python Version: [e.g. 3.12]
-- PoseGuard AI Version: 1.0.0-beta
+- PoseGuard AI Version: 1.0.2-beta
 
 **Additional Context**
 Add any other context, terminal logs, or screenshots about the problem here.

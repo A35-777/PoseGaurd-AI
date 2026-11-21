@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "poseguard"
-version = "1.0.0"
+version = "1.0.2"
 description = "PoseGuard AI — 3D Skeletal Animation Motion Defect Analysis System"
 authors = [{ name = "PoseGuard AI Contributors", email = "contributors@poseguard.io" }]
 readme = "README.md"

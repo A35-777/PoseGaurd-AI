@@ -10,9 +10,9 @@ In character animation systems, inference latency and memory footprint are param
 
 `PoseGuardNet` was designed to achieve high multi-label classification accuracy with:
 - **Zero GPU dependency** (Runs on basic CPU cores).
-- **Sub-megabyte model size** (0.835 MB).
-- **Sub-millisecond inference latency** (0.53 ms per 32-frame window).
-- **Total Parameters**: 214,597 (0.21M).
+- **Sub-megabyte model size** (0.915 MB / 941 KB).
+- **Sub-millisecond inference latency** (0.58 ms neural / 0.71 ms hybrid per window).
+- **Total Parameters**: 235,221 (0.24M, strictly $\le 250\text{k}$).
 
 ---
 
@@ -33,24 +33,26 @@ PoseGuardNet                             [Batch, 5]                --
 │    ├─ LeakyReLU (0.1)                  [Batch, 128, 16]          --
 │    ├─ Conv1d (128 -> 128, k=3, p=1)   [Batch, 128, 16]          49,280
 │    ├─ BatchNorm1d (128)                [Batch, 128, 16]          256
+│    ├─ SqueezeExcitation1d: se          [Batch, 128, 16]          4,240
 │    └─ Sequential: shortcut             [Batch, 128, 16]          --
 │         ├─ Conv1d (64 -> 128, k=1)     [Batch, 128, 16]          8,320
 │         └─ BatchNorm1d (128)           [Batch, 128, 16]          256
 ├─ MaxPool1d (k=2)                       [Batch, 128, 8]           --
 ├─ Dropout (p=0.25)                      [Batch, 128, 8]           --
 ├─ GRU: gru (in=128, hidden=64, BiGRU)   [Batch, 8, 128]           74,496
-├─ AdaptiveAvgPool1d (1)                 [Batch, 128]              --
-├─ AdaptiveMaxPool1d (1)                 [Batch, 128]              --
-└─ Sequential: classifier                [Batch, 5]                --
-     ├─ Linear (256 -> 128)              [Batch, 128]              32,896
+├─ AdaptiveAvgPool1d: conv_pool (1)      [Batch, 128]              --
+├─ AdaptiveAvgPool1d: gru_avg (1)        [Batch, 128]              --
+├─ AdaptiveMaxPool1d: gru_max (1)        [Batch, 128]              --
+└─ Sequential: classifier (384 -> 5)     [Batch, 5]                --
+     ├─ Linear (384 -> 128)              [Batch, 128]              49,280
      ├─ LeakyReLU (0.1)                  [Batch, 128]              --
      ├─ Dropout (p=0.25)                 [Batch, 128]              --
      ├─ Linear (128 -> 64)               [Batch, 64]               8,256
      ├─ LeakyReLU (0.1)                  [Batch, 64]               --
      └─ Linear (64 -> 5)                 [Batch, 5]                325
 ========================================================================
-Total Trainable Parameters: 214,597
-Checkpoint Size: 0.835 MB (855,142 bytes)
+Total Trainable Parameters: 235,221
+Checkpoint Size: 0.915 MB (959,837 bytes)
 ```
 
 ---

@@ -8,6 +8,6 @@ PoseGuard AI operates entirely on your local machine.
 - **Session Lifecycles**: In-memory analysis states are maintained only for the lifetime of your active CLI command or local server process.
 
 ## Model Training & Checkpoints
-- The pre-packaged 855 KB checkpoint (`models/poseguard_v1.pt`) was trained strictly on open synthetic and procedurally labeled kinematic sequences.
+- The pre-packaged 941 KB checkpoint (`models/poseguard_v1.pt`) was trained strictly on open synthetic and procedurally labeled kinematic sequences.
 - PoseGuard AI does not collect or transmit user animations for model retraining or telemetry.
 

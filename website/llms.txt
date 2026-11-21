@@ -7,17 +7,17 @@
 - Release: v1.0.2-beta
 - Architecture: Hybrid (1D Conv-Residual-BiGRU + Analytical Kinematic Verifier)
 - Model Size: 941 KB (235,221 parameters)
-- Target Execution: 100% Offline, Consumer CPU (Single-thread latency 0.74 ms/window)
+- Target Execution: 100% Offline, Consumer CPU (Single-thread latency 0.71 ms/window)
 - Supported Defect Types: Foot Sliding, Ground Penetration, Unnatural Pose Transitions, Contact Inconsistency, Bone Stretch Anomalies
 - Input Formats: BioVision Hierarchy (.bvh), NumPy Archives (.npz, .npy)
 - Interfaces: Python SDK, CLI (`poseguard`), FastAPI REST Server, Three.js 3D Web Studio
 
 ## Performance (Held-out Test Motion Family: Subject 6 Pivot Turn)
-- Exact Accuracy: 84.52%
-- Macro F1: 0.8462
-- Precision: 87.67%
-- Recall: 85.00%
-- False Positive Rate: 1.92%
+- Exact Accuracy: 91.67%
+- Macro F1: 0.9214
+- Precision: 97.78%
+- Recall: 88.75%
+- False Positive Rate: 0.27%
 - Memory: < 280 MB RAM
 
 ## Core Principles

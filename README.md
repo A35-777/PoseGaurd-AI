@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](pyproject.toml)
 [![CI](https://github.com/A35-777/PoseGaurd-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/A35-777/PoseGaurd-AI/actions)
 [![Code Style](https://img.shields.io/badge/code%20style-black%20%2F%20ruff-000000.svg)](CONTRIBUTING.md)
-[![Model](https://img.shields.io/badge/model-PoseGuardNet%20(855%20KB)-emerald.svg)](docs/MODEL_CARD.md)
+[![Model](https://img.shields.io/badge/model-PoseGuardNet%20(941%20KB)-emerald.svg)](docs/MODEL_CARD.md)
 [![Runtime](https://img.shields.io/badge/runtime-100%25%20CPU%20Offline-orange.svg)](docs/BENCHMARKS.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 
@@ -15,7 +15,7 @@
 
 ## 💡 Why PoseGuard AI?
 
-In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic flaws—such as planted feet sliding during contact, limbs sinking beneath the floor, and joint popping from retargeting glitches—frequently slip past automated ingestion checks and are only caught after expensive render passes or live player bug reports. PoseGuard AI solves this right at the source: an ultra-lightweight, **941 KB** dual-engine running **100% offline on standard CPUs at 240+ FPS**. By cross-verifying a compact temporal neural model against exact deterministic rigid-body kinematics, PoseGuard AI achieves a **1.92% false-positive rate** and **84.52% exact accuracy**, empowering animators and technical artists with instant, actionable defect alerts without requiring GPU clusters, cloud telemetry, or external API keys.
+In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic flaws—such as planted feet sliding during contact, limbs sinking beneath the floor, and joint popping from retargeting glitches—frequently slip past automated ingestion checks and are only caught after expensive render passes or live player bug reports. PoseGuard AI solves this right at the source: an ultra-lightweight, **941 KB** dual-engine running **100% offline on standard CPUs at 240+ FPS**. By cross-verifying a compact temporal neural model against exact deterministic rigid-body kinematics, PoseGuard AI achieves a **0.27% false-positive rate** and **91.67% exact accuracy**, empowering animators and technical artists with instant, actionable defect alerts without requiring GPU clusters, cloud telemetry, or external API keys.
 
 ---
 
@@ -26,7 +26,7 @@ PoseGuard AI is built around a non-negotiable architectural vision:
 - **Tiny Models Only**: Powered by `PoseGuardNet`, a 235,221-parameter Conv1D-Residual-BiGRU network with Squeeze-and-Excitation attention stored in a single **941 KB (0.92 MB)** checkpoint. We strictly stay $\le 250\text{k}$ parameters and do not use gigabyte models, heavy diffusion networks, or cloud LLMs.
 - **100% Offline & CPU-Native**: Inference executes entirely in-process on consumer multi-core CPUs in $< 0.75\text{ ms}$ per temporal window. Zero CUDA, zero cloud dependencies.
 - **Extremely Low Footprint**: Requires $< 280\text{ MB}$ RAM at peak runtime and under 25 MB total disk space (including weights and dependencies).
-- **Hybrid Precision**: Fuses compact neural temporal pattern recognition with exact analytical physics (contact velocity, ground clearance, bone rigidity) to suppress false positives (1.92% FPR, 84.62% Macro F1).
+- **Hybrid Precision**: Fuses compact neural temporal pattern recognition with exact analytical physics (contact velocity, ground clearance, bone rigidity) to suppress false positives (0.27% FPR, 92.14% Macro F1).
 - **Advisory QA Tool**: Designed to catch technical glitches and accelerate human review, never to unilaterally dictate aesthetic style or override an animator's creative intent.
 - **Privacy-First**: Zero tracking, zero telemetry, zero external network calls. All data stays strictly on your local machine.
 
@@ -138,7 +138,7 @@ Integrate defect verification into custom Python pipelines or DCC scripts with z
 ```python
 from poseguard import PoseGuard
 
-# Initialize detector (loads 855 KB checkpoint on CPU)
+# Initialize detector (loads 941 KB checkpoint on CPU)
 detector = PoseGuard()
 
 # Analyze animation clip

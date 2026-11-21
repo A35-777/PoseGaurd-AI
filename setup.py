@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="poseguard",
-    version="1.0.0",
+    version="1.0.2",
     author="PoseGuard AI Contributors",
     author_email="contributors@poseguard.io",
     description="PoseGuard AI — 3D Skeletal Animation Motion Defect Analysis System",

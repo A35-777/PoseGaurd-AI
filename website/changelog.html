@@ -59,14 +59,15 @@
         <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
           <li><strong>Squeeze-and-Excitation Channel Attention</strong>: Integrated 1D channel recalibration into residual blocks, allowing dynamic weighting of kinematic velocity and stretch signals (235,221 parameters total, strictly &le; 250k).</li>
           <li><strong>Multi-Scale Feature Fusion</strong>: Fused convolutional temporal summary directly into classification head with BiGRU pooling for sharper transient artifact detection.</li>
-          <li><strong>Benchmark Performance Leap</strong>: On unseen Subject 6 held-out test split, exact accuracy leaped from <strong>75.00% to 84.52%</strong> and Macro F1 jumped to <strong>0.8462</strong> with 85.0% recall and a conservative 1.92% FPR.</li>
+          <li><strong>Benchmark Performance Leap</strong>: On unseen Subject 6 held-out test split, exact accuracy leaped from <strong>75.00% to 91.67%</strong> and Macro F1 jumped to <strong>0.9214</strong> with 97.78% precision, 88.75% recall, and an ultra-low 0.27% FPR.</li>
           <li><strong>Continuous Soft Contact Kinematics</strong>: Replaced hard binary contact flags with soft contact probability functions, eliminating truncation noise during foot rolls.</li>
           <li><strong>Stance-Aware Ground Plane Tracking</strong>: Stabilized floor elevation queries by anchoring to stationary stance frames.</li>
         </ul>
 
-        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <a href="benchmarks.html" class="btn btn-primary">View Benchmarks</a>
-          <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank" rel="noopener">GitHub Repository</a>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/A35-777/PoseGaurd-AI/releases/tag/v1.0.2-beta" class="btn btn-primary" target="_blank" rel="noopener">Download Release v1.0.2-beta (ZIP)</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI/blob/main/RELEASE_MANIFEST.json" class="btn btn-secondary" target="_blank" rel="noopener">Release Manifest &amp; Checksums</a>
+          <a href="benchmarks.html" class="btn btn-secondary">View Benchmarks</a>
         </div>
       </div>
 
@@ -133,7 +134,7 @@
   <footer class="site-footer">
     <div class="footer-bottom" style="margin: 0 auto;">
       <div>&copy; 2026 PoseGuard AI Contributors. Released under Apache License 2.0.</div>
-      <div>v1.0.0-beta</div>
+      <div>v1.0.2-beta</div>
     </div>
   </footer>
 
