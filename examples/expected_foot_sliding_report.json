@@ -8,20 +8,42 @@
   "ground_y_used": 0.0173,
   "quality_summary": {
     "overall_status": "critical_defects",
-    "total_defects": 6,
+    "total_defects": 5,
     "defect_counts_by_type": {
+      "bone_stretch_anomaly": 1,
       "foot_sliding": 2,
-      "bone_stretch_anomaly": 2,
       "unnatural_pose_transition": 2
     },
     "defect_counts_by_severity": {
-      "high": 2,
-      "medium": 1,
-      "critical": 3
+      "critical": 3,
+      "high": 2
     },
     "defect_free_frame_percentage": 65.0
   },
   "defects": [
+    {
+      "type": "bone_stretch_anomaly",
+      "joint": "LeftLeg->LeftFoot",
+      "start_frame": 47,
+      "end_frame": 77,
+      "duration_frames": 31,
+      "duration_sec": 1.033,
+      "severity": "critical",
+      "confidence": 0.413,
+      "geometric_evidence": {
+        "max_stretch_percent": 13.78,
+        "mean_stretch_percent": 10.74,
+        "nominal_bone_length_m": 0.462,
+        "max_measured_length_m": 0.4303
+      },
+      "model_prediction": {
+        "neural_support_probability": 0.035,
+        "model_version": "poseguard-tiny-v1"
+      },
+      "suggested_correction": "Enforce rigid length constraint on bone segment 'LeftLeg->LeftFoot' to maintain constant 46.2 cm length.",
+      "verification_status": "confirmed_by_geometry",
+      "is_uncertain": false
+    },
     {
       "type": "foot_sliding",
       "joint": "LeftFoot",
@@ -30,7 +52,7 @@
       "duration_frames": 9,
       "duration_sec": 0.3,
       "severity": "high",
-      "confidence": 0.558,
+      "confidence": 0.687,
       "geometric_evidence": {
         "max_slide_speed_mps": 0.434,
         "mean_slide_speed_mps": 0.3488,
@@ -39,57 +61,11 @@
         "ground_y": 0.0173
       },
       "model_prediction": {
-        "neural_support_probability": 0.244,
+        "neural_support_probability": 0.603,
         "model_version": "poseguard-tiny-v1"
       },
       "suggested_correction": "Lock LeftFoot world transform or apply Inverse Kinematics (IK) pinning between frames 37 and 45.",
-      "verification_status": "confirmed_by_geometry",
-      "is_uncertain": false
-    },
-    {
-      "type": "bone_stretch_anomaly",
-      "joint": "LeftLeg->LeftFoot",
-      "start_frame": 47,
-      "end_frame": 52,
-      "duration_frames": 6,
-      "duration_sec": 0.2,
-      "severity": "medium",
-      "confidence": 0.445,
-      "geometric_evidence": {
-        "max_stretch_percent": 13.78,
-        "mean_stretch_percent": 10.74,
-        "nominal_bone_length_m": 0.462,
-        "max_measured_length_m": 0.4303
-      },
-      "model_prediction": {
-        "neural_support_probability": 0.015,
-        "model_version": "poseguard-tiny-v1"
-      },
-      "suggested_correction": "Enforce rigid length constraint on bone segment 'LeftLeg->LeftFoot' to maintain constant 46.2 cm length.",
-      "verification_status": "confirmed_by_geometry",
-      "is_uncertain": false
-    },
-    {
-      "type": "bone_stretch_anomaly",
-      "joint": "LeftLeg->LeftFoot",
-      "start_frame": 54,
-      "end_frame": 77,
-      "duration_frames": 24,
-      "duration_sec": 0.8,
-      "severity": "critical",
-      "confidence": 0.549,
-      "geometric_evidence": {
-        "max_stretch_percent": 47.51,
-        "mean_stretch_percent": 34.76,
-        "nominal_bone_length_m": 0.462,
-        "max_measured_length_m": 0.6815
-      },
-      "model_prediction": {
-        "neural_support_probability": 0.01,
-        "model_version": "poseguard-tiny-v1"
-      },
-      "suggested_correction": "Enforce rigid length constraint on bone segment 'LeftLeg->LeftFoot' to maintain constant 46.2 cm length.",
-      "verification_status": "confirmed_by_geometry",
+      "verification_status": "verified_by_both",
       "is_uncertain": false
     },
     {
@@ -100,7 +76,7 @@
       "duration_frames": 9,
       "duration_sec": 0.3,
       "severity": "high",
-      "confidence": 0.866,
+      "confidence": 0.913,
       "geometric_evidence": {
         "max_slide_speed_mps": 0.434,
         "mean_slide_speed_mps": 0.3488,
@@ -109,7 +85,7 @@
         "ground_y": 0.0173
       },
       "model_prediction": {
-        "neural_support_probability": 0.929,
+        "neural_support_probability": 0.979,
         "model_version": "poseguard-tiny-v1"
       },
       "suggested_correction": "Lock LeftFoot world transform or apply Inverse Kinematics (IK) pinning between frames 67 and 75.",
@@ -124,14 +100,14 @@
       "duration_frames": 6,
       "duration_sec": 0.2,
       "severity": "critical",
-      "confidence": 0.453,
+      "confidence": 0.336,
       "geometric_evidence": {
         "peak_acceleration_mps2": 142.77,
         "peak_jerk_mps3": 3791.92,
         "threshold_mps2": 90.0
       },
       "model_prediction": {
-        "neural_support_probability": 0.002,
+        "neural_support_probability": 0.012,
         "model_version": "poseguard-tiny-v1"
       },
       "suggested_correction": "Apply trajectory smoothing / spherical linear interpolation (Slerp) on LeftFoot between frames 75 and 80.",
@@ -146,14 +122,14 @@
       "duration_frames": 6,
       "duration_sec": 0.2,
       "severity": "critical",
-      "confidence": 0.453,
+      "confidence": 0.336,
       "geometric_evidence": {
         "peak_acceleration_mps2": 142.77,
         "peak_jerk_mps3": 3791.93,
         "threshold_mps2": 90.0
       },
       "model_prediction": {
-        "neural_support_probability": 0.002,
+        "neural_support_probability": 0.012,
         "model_version": "poseguard-tiny-v1"
       },
       "suggested_correction": "Apply trajectory smoothing / spherical linear interpolation (Slerp) on LeftToeBase between frames 75 and 80.",
@@ -191,7 +167,7 @@
       "total_canonical_joints": 21,
       "height_scale_factor": 1.1551154851913452,
       "original_measured_height": 1.5149999856948853,
-      "estimated_ground_y": 0.01732671447098255
+      "estimated_ground_y": 0.017326686531305313
     }
   }
 }

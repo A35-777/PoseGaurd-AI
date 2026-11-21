@@ -5,7 +5,7 @@
   "fps": 30.000300003000028,
   "duration_seconds": 4.0,
   "num_joints": 21,
-  "ground_y_used": -0.1283,
+  "ground_y_used": -0.1304,
   "quality_summary": {
     "overall_status": "clean",
     "total_defects": 0,
@@ -26,7 +26,7 @@
       "total_canonical_joints": 21,
       "height_scale_factor": 1.0876693725585938,
       "original_measured_height": 1.6089448928833008,
-      "estimated_ground_y": -0.128273606300354
+      "estimated_ground_y": -0.13041172921657562
     }
   }
 }

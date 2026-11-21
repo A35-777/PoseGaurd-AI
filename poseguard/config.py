@@ -121,8 +121,8 @@ class PoseGuardConfig:
     bone_stretch_relative_tolerance: float = 0.06  # 6% bone length variation allowed
     
     # Decision Engine Weights
-    neural_weight: float = 0.45
-    geometric_weight: float = 0.55
+    neural_weight: float = 0.60
+    geometric_weight: float = 0.40
     min_detection_confidence: float = 0.40
     high_confidence_threshold: float = 0.75
 

@@ -45,12 +45,36 @@
         Detailed history of releases, new features, model checkpoints, and security improvements.
       </p>
 
-      <!-- v1.0.1-beta -->
+      <!-- v1.0.2-beta -->
       <div class="card" style="margin-bottom: 2.5rem; border-color: var(--cyan);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.1-beta</h2>
+            <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.2-beta</h2>
             <span class="beta-badge">Latest Release</span>
+          </div>
+          <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-21</span>
+        </div>
+
+        <h4 style="color: var(--cyan); margin-top: 1.25rem; margin-bottom: 0.5rem;">⚡ Core Model &amp; Detection Pipeline Upgrade</h4>
+        <ul style="color: var(--text-muted); line-height: 1.8; list-style: square; padding-left: 1.5rem;">
+          <li><strong>Squeeze-and-Excitation Channel Attention</strong>: Integrated 1D channel recalibration into residual blocks, allowing dynamic weighting of kinematic velocity and stretch signals (235,221 parameters total, strictly &le; 250k).</li>
+          <li><strong>Multi-Scale Feature Fusion</strong>: Fused convolutional temporal summary directly into classification head with BiGRU pooling for sharper transient artifact detection.</li>
+          <li><strong>Benchmark Performance Leap</strong>: On unseen Subject 6 held-out test split, exact accuracy leaped from <strong>75.00% to 84.52%</strong> and Macro F1 jumped to <strong>0.8462</strong> with 85.0% recall and a conservative 1.92% FPR.</li>
+          <li><strong>Continuous Soft Contact Kinematics</strong>: Replaced hard binary contact flags with soft contact probability functions, eliminating truncation noise during foot rolls.</li>
+          <li><strong>Stance-Aware Ground Plane Tracking</strong>: Stabilized floor elevation queries by anchoring to stationary stance frames.</li>
+        </ul>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="benchmarks.html" class="btn btn-primary">View Benchmarks</a>
+          <a href="https://github.com/A35-777/PoseGaurd-AI" class="btn btn-secondary" target="_blank" rel="noopener">GitHub Repository</a>
+        </div>
+      </div>
+
+      <!-- v1.0.1-beta -->
+      <div class="card" style="margin-bottom: 2.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <h2 style="font-size: 1.5rem; color: var(--text-main);">v1.0.1-beta</h2>
           </div>
           <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-mono);">Released: 2026-11-21</span>
         </div>

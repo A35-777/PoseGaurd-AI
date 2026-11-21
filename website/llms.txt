@@ -1,23 +1,23 @@
 # PoseGuard AI
 
-> Autonomous 3D skeletal animation motion defect analysis system powered by a 214K parameter tiny neural model and deterministic geometric kinematics.
+> Autonomous 3D skeletal animation motion defect analysis system powered by a 235K parameter tiny neural model and deterministic geometric kinematics.
 
 ## Overview
 - Project Name: PoseGuard AI
-- Release: v1.0.0-beta
+- Release: v1.0.2-beta
 - Architecture: Hybrid (1D Conv-Residual-BiGRU + Analytical Kinematic Verifier)
-- Model Size: 855 KB (214,597 parameters)
-- Target Execution: 100% Offline, Consumer CPU (Single-thread latency 0.64 ms/window)
+- Model Size: 941 KB (235,221 parameters)
+- Target Execution: 100% Offline, Consumer CPU (Single-thread latency 0.74 ms/window)
 - Supported Defect Types: Foot Sliding, Ground Penetration, Unnatural Pose Transitions, Contact Inconsistency, Bone Stretch Anomalies
 - Input Formats: BioVision Hierarchy (.bvh), NumPy Archives (.npz, .npy)
 - Interfaces: Python SDK, CLI (`poseguard`), FastAPI REST Server, Three.js 3D Web Studio
 
 ## Performance (Held-out Test Motion Family: Subject 6 Pivot Turn)
-- Exact Accuracy: 77.38%
-- Macro F1: 0.7447
-- Precision: 92.18%
-- Recall: 65.00%
-- False Positive Rate: 2.06%
+- Exact Accuracy: 84.52%
+- Macro F1: 0.8462
+- Precision: 87.67%
+- Recall: 85.00%
+- False Positive Rate: 1.92%
 - Memory: < 280 MB RAM
 
 ## Core Principles

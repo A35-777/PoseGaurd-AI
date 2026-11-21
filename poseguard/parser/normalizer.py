@@ -151,7 +151,7 @@ class SkeletonNormalizer:
         return new_clip, scale_factor
 
     def estimate_ground_plane(self, clip: AnimationClip) -> float:
-        """Estimate the floor plane level from lowest foot contact heights."""
+        """Estimate the floor plane level from lowest foot contact heights with stance-phase stabilization."""
         l_foot_idx = clip.skeleton.get_joint_index("LeftFoot")
         r_foot_idx = clip.skeleton.get_joint_index("RightFoot")
         l_toe_idx = clip.skeleton.get_joint_index("LeftToeBase")
@@ -163,7 +163,19 @@ class SkeletonNormalizer:
             return float(np.percentile(clip.joint_positions[:, :, 1], 2))
             
         foot_y = clip.joint_positions[:, foot_indices, 1]
-        # Ground plane is estimated as the 5th percentile of foot Y values
+        
+        # Stance-aware ground estimation: prioritize frames where foot is stationary in vertical axis
+        dt = clip.frame_time if clip.frame_time > 0 else 1.0 / 30.0
+        if foot_y.shape[0] > 2:
+            foot_vy = np.abs(np.diff(foot_y, axis=0) / dt)
+            is_flat = foot_vy < 0.12  # Low vertical speed indicates contact stance
+            if np.any(is_flat):
+                flat_y = foot_y[:-1][is_flat]
+                if len(flat_y) >= 4:
+                    # Robust 5th percentile of flat stance frames
+                    return float(np.percentile(flat_y, 5))
+                    
+        # Ground plane fallback: 5th percentile of all foot Y values
         ground_y = float(np.percentile(foot_y, 5))
         return ground_y
 

@@ -17,16 +17,16 @@
   "comparison": [
     {
       "model_name": "Deterministic Geometry Baseline",
-      "exact_accuracy": 0.2738,
-      "element_accuracy": 0.719,
-      "macro_f1": 0.4351,
-      "precision": 0.329,
+      "exact_accuracy": 0.25,
+      "element_accuracy": 0.6976,
+      "macro_f1": 0.4235,
+      "precision": 0.3198,
       "recall": 0.7625,
-      "global_fpr": 0.2912,
+      "global_fpr": 0.3159,
       "global_fnr": 0.2143,
-      "ece": 0.2683,
-      "brier_score": 0.2295,
-      "inference_latency_ms": 0.097,
+      "ece": 0.3063,
+      "brier_score": 0.2517,
+      "inference_latency_ms": 0.116,
       "file_size_mb": 0.0,
       "per_defect": {
         "foot_sliding": {
@@ -51,17 +51,17 @@
           "fnr": 0.375
         },
         "contact_inconsistency": {
-          "f1": 0.2581,
-          "precision": 0.1739,
+          "f1": 0.2222,
+          "precision": 0.1429,
           "recall": 0.5,
-          "fpr": 0.25,
+          "fpr": 0.3158,
           "fnr": 0.5
         },
         "bone_stretch_anomaly": {
-          "f1": 0.3077,
-          "precision": 0.1818,
+          "f1": 0.2857,
+          "precision": 0.1667,
           "recall": 1.0,
-          "fpr": 0.4737,
+          "fpr": 0.5263,
           "fnr": 0.0
         }
       },
@@ -86,30 +86,30 @@
         },
         "contact_inconsistency": {
           "TP": 4,
-          "FP": 19,
+          "FP": 24,
           "FN": 4,
-          "TN": 57
+          "TN": 52
         },
         "bone_stretch_anomaly": {
           "TP": 8,
-          "FP": 36,
+          "FP": 40,
           "FN": 0,
-          "TN": 40
+          "TN": 36
         }
       }
     },
     {
       "model_name": "Simple Statistical Baseline",
-      "exact_accuracy": 0.1786,
-      "element_accuracy": 0.7476,
-      "macro_f1": 0.1231,
-      "precision": 0.16,
-      "recall": 0.1,
-      "global_fpr": 0.1593,
-      "global_fnr": 0.8571,
-      "ece": 0.197,
-      "brier_score": 0.2151,
-      "inference_latency_ms": 0.141,
+      "exact_accuracy": 0.2381,
+      "element_accuracy": 0.7595,
+      "macro_f1": 0.1091,
+      "precision": 0.2,
+      "recall": 0.075,
+      "global_fpr": 0.1401,
+      "global_fnr": 0.8929,
+      "ece": 0.1871,
+      "brier_score": 0.2081,
+      "inference_latency_ms": 0.15,
       "file_size_mb": 0.0,
       "per_defect": {
         "foot_sliding": {
@@ -120,11 +120,11 @@
           "fnr": 1.0
         },
         "ground_penetration": {
-          "f1": 0.6154,
-          "precision": 0.8,
-          "recall": 0.5,
-          "fpr": 0.0294,
-          "fnr": 0.5
+          "f1": 0.5455,
+          "precision": 1.0,
+          "recall": 0.375,
+          "fpr": 0.0,
+          "fnr": 0.625
         },
         "unnatural_pose_transition": {
           "f1": 0.0,
@@ -137,14 +137,14 @@
           "f1": 0.0,
           "precision": 0.0,
           "recall": 0.0,
-          "fpr": 0.6579,
+          "fpr": 0.6184,
           "fnr": 1.0
         },
         "bone_stretch_anomaly": {
           "f1": 0.0,
           "precision": 0.0,
           "recall": 0.0,
-          "fpr": 0.0789,
+          "fpr": 0.0526,
           "fnr": 1.0
         }
       },
@@ -156,10 +156,10 @@
           "TN": 68
         },
         "ground_penetration": {
-          "TP": 8,
-          "FP": 2,
-          "FN": 8,
-          "TN": 66
+          "TP": 6,
+          "FP": 0,
+          "FN": 10,
+          "TN": 68
         },
         "unnatural_pose_transition": {
           "TP": 0,
@@ -169,45 +169,128 @@
         },
         "contact_inconsistency": {
           "TP": 0,
-          "FP": 50,
+          "FP": 47,
           "FN": 8,
-          "TN": 26
+          "TN": 29
         },
         "bone_stretch_anomaly": {
           "TP": 0,
-          "FP": 6,
+          "FP": 4,
           "FN": 8,
-          "TN": 70
+          "TN": 72
         }
       }
     },
     {
       "model_name": "Compact Neural Model (PoseGuardNet)",
-      "exact_accuracy": 0.8214,
-      "element_accuracy": 0.95,
-      "macro_f1": 0.7962,
-      "precision": 0.9167,
-      "recall": 0.725,
-      "global_fpr": 0.011,
-      "global_fnr": 0.3036,
-      "ece": 0.0215,
-      "brier_score": 0.0376,
-      "inference_latency_ms": 0.532,
-      "file_size_mb": 0.84,
+      "exact_accuracy": 0.8929,
+      "element_accuracy": 0.9786,
+      "macro_f1": 0.9071,
+      "precision": 0.9778,
+      "recall": 0.8625,
+      "global_fpr": 0.0027,
+      "global_fnr": 0.1429,
+      "ece": 0.0357,
+      "brier_score": 0.0179,
+      "inference_latency_ms": 0.58,
+      "file_size_mb": 0.92,
       "per_defect": {
         "foot_sliding": {
-          "f1": 0.72,
+          "f1": 0.8571,
           "precision": 1.0,
-          "recall": 0.5625,
+          "recall": 0.75,
           "fpr": 0.0,
-          "fnr": 0.4375
+          "fnr": 0.25
         },
         "ground_penetration": {
-          "f1": 0.7857,
-          "precision": 0.9167,
-          "recall": 0.6875,
-          "fpr": 0.0147,
-          "fnr": 0.3125
+          "f1": 0.9677,
+          "precision": 1.0,
+          "recall": 0.9375,
+          "fpr": 0.0,
+          "fnr": 0.0625
+        },
+        "unnatural_pose_transition": {
+          "f1": 0.7692,
+          "precision": 1.0,
+          "recall": 0.625,
+          "fpr": 0.0,
+          "fnr": 0.375
+        },
+        "contact_inconsistency": {
+          "f1": 0.9412,
+          "precision": 0.8889,
+          "recall": 1.0,
+          "fpr": 0.0132,
+          "fnr": 0.0
+        },
+        "bone_stretch_anomaly": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "fnr": 0.0
+        }
+      },
+      "confusion_matrix": {
+        "foot_sliding": {
+          "TP": 12,
+          "FP": 0,
+          "FN": 4,
+          "TN": 68
+        },
+        "ground_penetration": {
+          "TP": 15,
+          "FP": 0,
+          "FN": 1,
+          "TN": 68
+        },
+        "unnatural_pose_transition": {
+          "TP": 5,
+          "FP": 0,
+          "FN": 3,
+          "TN": 76
+        },
+        "contact_inconsistency": {
+          "TP": 8,
+          "FP": 1,
+          "FN": 0,
+          "TN": 75
+        },
+        "bone_stretch_anomaly": {
+          "TP": 8,
+          "FP": 0,
+          "FN": 0,
+          "TN": 76
+        }
+      }
+    },
+    {
+      "model_name": "Calibrated Hybrid Model (PoseGuard AI)",
+      "exact_accuracy": 0.9167,
+      "element_accuracy": 0.9833,
+      "macro_f1": 0.9214,
+      "precision": 0.9778,
+      "recall": 0.8875,
+      "global_fpr": 0.0027,
+      "global_fnr": 0.1071,
+      "ece": 0.1428,
+      "brier_score": 0.0485,
+      "inference_latency_ms": 0.711,
+      "file_size_mb": 0.92,
+      "per_defect": {
+        "foot_sliding": {
+          "f1": 0.8966,
+          "precision": 1.0,
+          "recall": 0.8125,
+          "fpr": 0.0,
+          "fnr": 0.1875
+        },
+        "ground_penetration": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "fnr": 0.0
         },
         "unnatural_pose_transition": {
           "f1": 0.7692,
@@ -224,25 +307,25 @@
           "fnr": 0.0
         },
         "bone_stretch_anomaly": {
-          "f1": 0.7059,
-          "precision": 0.6667,
-          "recall": 0.75,
-          "fpr": 0.0395,
-          "fnr": 0.25
+          "f1": 0.9412,
+          "precision": 0.8889,
+          "recall": 1.0,
+          "fpr": 0.0132,
+          "fnr": 0.0
         }
       },
       "confusion_matrix": {
         "foot_sliding": {
-          "TP": 9,
+          "TP": 13,
           "FP": 0,
-          "FN": 7,
+          "FN": 3,
           "TN": 68
         },
         "ground_penetration": {
-          "TP": 11,
-          "FP": 1,
-          "FN": 5,
-          "TN": 67
+          "TP": 16,
+          "FP": 0,
+          "FN": 0,
+          "TN": 68
         },
         "unnatural_pose_transition": {
           "TP": 5,
@@ -257,93 +340,10 @@
           "TN": 76
         },
         "bone_stretch_anomaly": {
-          "TP": 6,
-          "FP": 3,
-          "FN": 2,
-          "TN": 73
-        }
-      }
-    },
-    {
-      "model_name": "Calibrated Hybrid Model (PoseGuard AI)",
-      "exact_accuracy": 0.7738,
-      "element_accuracy": 0.9429,
-      "macro_f1": 0.7447,
-      "precision": 0.9218,
-      "recall": 0.65,
-      "global_fpr": 0.011,
-      "global_fnr": 0.3571,
-      "ece": 0.1322,
-      "brier_score": 0.08,
-      "inference_latency_ms": 0.636,
-      "file_size_mb": 0.84,
-      "per_defect": {
-        "foot_sliding": {
-          "f1": 0.7692,
-          "precision": 1.0,
-          "recall": 0.625,
-          "fpr": 0.0,
-          "fnr": 0.375
-        },
-        "ground_penetration": {
-          "f1": 0.7407,
-          "precision": 0.9091,
-          "recall": 0.625,
-          "fpr": 0.0147,
-          "fnr": 0.375
-        },
-        "unnatural_pose_transition": {
-          "f1": 0.7692,
-          "precision": 1.0,
-          "recall": 0.625,
-          "fpr": 0.0,
-          "fnr": 0.375
-        },
-        "contact_inconsistency": {
-          "f1": 0.6667,
-          "precision": 1.0,
-          "recall": 0.5,
-          "fpr": 0.0,
-          "fnr": 0.5
-        },
-        "bone_stretch_anomaly": {
-          "f1": 0.7778,
-          "precision": 0.7,
-          "recall": 0.875,
-          "fpr": 0.0395,
-          "fnr": 0.125
-        }
-      },
-      "confusion_matrix": {
-        "foot_sliding": {
-          "TP": 10,
-          "FP": 0,
-          "FN": 6,
-          "TN": 68
-        },
-        "ground_penetration": {
-          "TP": 10,
+          "TP": 8,
           "FP": 1,
-          "FN": 6,
-          "TN": 67
-        },
-        "unnatural_pose_transition": {
-          "TP": 5,
-          "FP": 0,
-          "FN": 3,
-          "TN": 76
-        },
-        "contact_inconsistency": {
-          "TP": 4,
-          "FP": 0,
-          "FN": 4,
-          "TN": 76
-        },
-        "bone_stretch_anomaly": {
-          "TP": 7,
-          "FP": 3,
-          "FN": 1,
-          "TN": 73
+          "FN": 0,
+          "TN": 75
         }
       }
     }

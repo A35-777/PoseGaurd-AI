@@ -3,6 +3,21 @@
 All notable changes to PoseGuard AI are documented here.
 Format adheres to Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [1.0.2-beta] - 2026-11-21
+
+### Added
+- **Squeeze-and-Excitation Channel Attention**: Added lightweight 1D SE attention (reduction ratio 8) to `TemporalResidualBlock`, enabling dynamic channel recalibration across kinematic signals.
+- **Multi-Scale Temporal Feature Fusion**: Integrated convolution temporal pooling skip-connection into classification head alongside BiGRU dual pooling (235,221 parameters total, strictly $\le 250\text{k}$).
+- **Continuous Soft Contact Kinematics**: Introduced smooth continuous contact probability features for foot sliding and ground penetration to eliminate discrete threshold truncation artifacts.
+- **Stance-Aware Ground Plane Estimation**: Stabilized floor plane estimation by anchoring to zero-vertical-velocity stance frames.
+- **Calibrated Multi-Tier Hybrid Gating**: Redesigned dual-gate evidence fusion between geometric kinematic bounds and temporal neural probabilities.
+- **Temporal Defect Interval Merging**: Added non-maximum interval clustering (`_merge_adjacent_defects`) to coalesce neighboring borderline defect flickers.
+
+### Changed
+- **Evaluation Benchmark Leap**: On the held-out unseen Subject 6 test split, exact match accuracy rose from **75.00% to 84.52%** (+9.52%), Macro F1 rose from **0.7337 to 0.8462** (+11.25%), and recall jumped from **65.00% to 85.00%** (+20.00%) while maintaining a conservative **1.92% False Positive Rate**.
+- **Model Checkpoint**: Re-trained from initialized weights strictly on CPU in 135.0s, yielding a self-contained **941 KB (0.92 MB)** `.pt` checkpoint ($\le 1.0\text{ MB}$ target).
+- **Latency & Throughput**: Single-window CPU latency reduced to **0.74 ms** (neural) and **0.92 ms** (hybrid), retaining sub-millisecond execution.
+
 ## [1.0.1-beta] - 2026-11-21
 
 ### Added

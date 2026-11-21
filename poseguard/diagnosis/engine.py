@@ -10,6 +10,45 @@ from ..geometry.detector import GeometricDefectDetector
 from ..model.inference import ModelInferenceEngine
 from .schema import DefectItem, QualitySummary, AnalysisResult
 
+def _merge_adjacent_defects(defects: List[DefectItem], max_gap: int = 3) -> List[DefectItem]:
+    """Merge closely adjacent defect intervals of the same type and joint."""
+    if not defects:
+        return []
+    defects_sorted = sorted(defects, key=lambda d: (d.type, d.joint, d.start_frame))
+    merged = []
+    curr = defects_sorted[0]
+    
+    sev_rank = {"critical": 4, "high": 3, "medium": 2, "low": 1}
+    
+    for nxt in defects_sorted[1:]:
+        if curr.type == nxt.type and curr.joint == nxt.joint and nxt.start_frame <= curr.end_frame + max_gap + 1:
+            new_end = max(curr.end_frame, nxt.end_frame)
+            new_dur = new_end - curr.start_frame + 1
+            new_conf = round(max(curr.confidence, nxt.confidence), 3)
+            new_sev = curr.severity if sev_rank.get(curr.severity, 1) >= sev_rank.get(nxt.severity, 1) else nxt.severity
+            verif = "verified_by_both" if "verified_by_both" in (curr.verification_status, nxt.verification_status) else curr.verification_status
+            
+            curr = DefectItem(
+                type=curr.type,
+                joint=curr.joint,
+                start_frame=curr.start_frame,
+                end_frame=new_end,
+                duration_frames=new_dur,
+                duration_sec=round(new_dur * (curr.duration_sec / max(1, curr.duration_frames)), 3),
+                severity=new_sev,
+                confidence=new_conf,
+                geometric_evidence=curr.geometric_evidence if curr.geometric_evidence else nxt.geometric_evidence,
+                model_prediction=curr.model_prediction if curr.model_prediction else nxt.model_prediction,
+                suggested_correction=curr.suggested_correction,
+                verification_status=verif,
+                is_uncertain=curr.is_uncertain and nxt.is_uncertain
+            )
+        else:
+            merged.append(curr)
+            curr = nxt
+    merged.append(curr)
+    return merged
+
 class HybridDiagnosisEngine:
     """Fuses deterministic kinematic geometry with compact neural temporal model predictions."""
     
@@ -78,10 +117,19 @@ class HybridDiagnosisEngine:
                     self.config.geometric_weight * c_geo + self.config.neural_weight * p_neural,
                     0.0, 0.99
                 ))
-                verif_status = "verified_by_both" if p_neural >= 0.45 else "confirmed_by_geometry"
+                if p_neural >= 0.38:
+                    verif_status = "verified_by_both"
+                    is_borderline = False
+                elif p_neural < 0.15 and c_geo < 0.65:
+                    verif_status = "flagged_by_geometry"
+                    is_borderline = True
+                else:
+                    verif_status = "confirmed_by_geometry"
+                    is_borderline = False
             else:
                 calibrated_conf = c_geo
                 verif_status = "confirmed_by_geometry"
+                is_borderline = False
                 
             model_pred_info = {
                 "neural_support_probability": round(p_neural, 3),
@@ -101,10 +149,13 @@ class HybridDiagnosisEngine:
                 model_prediction=model_pred_info,
                 suggested_correction=g_defect["suggested_correction"],
                 verification_status=verif_status,
-                is_uncertain=False
+                is_uncertain=is_borderline
             )
-            confirmed_defects.append(item)
-            defective_frames_mask[start_f:end_f + 1] = True
+            if is_borderline:
+                uncertain_findings.append(item)
+            else:
+                confirmed_defects.append(item)
+                defective_frames_mask[start_f:end_f + 1] = True
             
         # 4. Check for Neural-Only Candidates (Borderline / Uncertain findings)
         if neural_results is not None:
@@ -117,7 +168,7 @@ class HybridDiagnosisEngine:
                 
                 # Check if this interval was already confirmed by geometry
                 overlap = np.any(defective_frames_mask[n_start:n_end + 1])
-                if not overlap and n_cand["confidence"] >= 0.68:
+                if not overlap and n_cand["confidence"] >= 0.72:
                     uncertain_item = DefectItem(
                         type=n_type,
                         joint="Skeletal Kinematic Chain",
@@ -138,7 +189,10 @@ class HybridDiagnosisEngine:
                     )
                     uncertain_findings.append(uncertain_item)
 
-        # 5. Build Quality Summary
+        # 5. Temporal Cluster Merge & Quality Summary
+        confirmed_defects = _merge_adjacent_defects(confirmed_defects, max_gap=3)
+        uncertain_findings = _merge_adjacent_defects(uncertain_findings, max_gap=3)
+
         total_defective_frames = int(np.sum(defective_frames_mask))
         defect_free_pct = round(100.0 * (1.0 - (total_defective_frames / max(1, clip.num_frames))), 1)
         

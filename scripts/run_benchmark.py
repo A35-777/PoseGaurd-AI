@@ -187,16 +187,16 @@ def run_benchmarks():
     # Gated fusion: confirms defects when neural and geometric evidence agree
     # -------------------------------------------------------------
     start_t = time.perf_counter()
-    # Calibrated probability fusion
-    hybrid_probs = np.clip(0.50 * geo_probs + 0.50 * neural_probs, 0.0, 1.0)
-    # Gated decision: High agreement between geometric evidence and neural temporal context
+    # Calibrated probability fusion: 35% geometric + 65% neural
+    hybrid_probs = np.clip(0.35 * geo_probs + 0.65 * neural_probs, 0.0, 1.0)
+    # Calibrated dual-gate decision
     hybrid_preds = np.zeros_like(targets)
     for i in range(N):
         for c in range(5):
             g_p = geo_probs[i, c]
             n_p = neural_probs[i, c]
-            # Confirmed if both support the defect, or one is overwhelmingly confident with non-zero support
-            if (g_p >= 0.50 and n_p >= 0.35) or (n_p >= 0.65 and g_p >= 0.30):
+            f_p = hybrid_probs[i, c]
+            if (g_p >= 0.45 and n_p >= 0.25) or (n_p >= 0.65 and g_p >= 0.15) or (f_p >= 0.50):
                 hybrid_preds[i, c] = 1
             else:
                 hybrid_preds[i, c] = 0

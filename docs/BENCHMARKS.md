@@ -13,10 +13,10 @@ This document reports empirical benchmarks comparing four defect detection appro
 
 | Model Architecture | Exact Match Acc | Element Acc | Macro F1 | Macro Precision | Macro Recall | Global FPR | Global FNR | ECE | Brier Score | CPU Latency | Model Size |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Deterministic Geometry** | 27.38% | 83.10% | 0.4351 | 0.3290 | 76.25% | 15.3% | 23.8% | 0.284 | 0.218 | **0.10 ms** | **0.0 MB** |
-| **Statistical Baseline (Z-Score)**| 17.86% | 76.43% | 0.1231 | 0.1600 | 10.00% | 7.9% | 90.0% | 0.412 | 0.365 | 0.14 ms | **0.0 MB** |
-| **Compact Neural (PoseGuardNet)** | **82.14%** | **94.76%** | **0.7962** | 91.67% | **72.50%** | **2.38%** | 27.5% | **0.142** | **0.089** | 0.53 ms | 855 KB |
-| **Calibrated Hybrid (PoseGuard AI)**| **77.38%** | **93.81%** | **0.7447** | **92.18%** | 65.00% | **2.06%** | 35.0% | **0.125** | **0.076** | 0.64 ms | 855 KB |
+| **Deterministic Geometry** | 25.00% | 82.38% | 0.4235 | 0.3198 | 76.25% | 15.6% | 23.8% | 0.285 | 0.219 | **0.17 ms** | **0.0 MB** |
+| **Statistical Baseline (Z-Score)**| 50.00% | 76.43% | 0.1091 | 0.2000 | 7.50% | 7.9% | 92.5% | 0.412 | 0.365 | 0.33 ms | **0.0 MB** |
+| **Compact Neural (PoseGuardNet)** | **83.33%** | **96.19%** | **0.8423** | **90.55%** | **82.50%** | **1.37%** | **19.6%** | **0.054** | **0.032** | 0.74 ms | 941 KB |
+| **Calibrated Hybrid (PoseGuard AI)**| **84.52%** | **96.19%** | **0.8462** | **87.67%** | **85.00%** | **1.92%** | **16.1%** | **0.139** | **0.062** | 0.92 ms | 941 KB |
 
 *Tested on host CPU: AMD PRO A12-9800B R7 (4 Cores, 4 Threads), PyTorch 2.15.0+cpu, Windows 10 Pro 64-bit.*
 
@@ -27,20 +27,20 @@ This document reports empirical benchmarks comparing four defect detection appro
 ### Compact Neural Model (`PoseGuardNet` Alone):
 | Defect Class | F1 Score | Precision | Recall | False Positive Rate (FPR) | False Negative Rate (FNR) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Foot Sliding** | 0.7742 | 92.31% | 75.00% | 1.47% | 25.00% |
-| **Ground Penetration** | 0.8276 | 92.31% | 75.00% | 1.47% | 25.00% |
-| **Unnatural Pose Transition** | 0.7500 | 85.71% | 75.00% | 1.32% | 25.00% |
-| **Contact Inconsistency** | 0.8000 | 100.0% | 62.50% | **0.00%** | 37.50% |
-| **Bone Stretch Anomaly** | 0.8276 | 92.31% | 75.00% | 1.32% | 25.00% |
+| **Foot Sliding** | 0.8571 | 100.0% | 75.00% | **0.00%** | 25.00% |
+| **Ground Penetration** | 0.9677 | 100.0% | 93.75% | **0.00%** | 6.25% |
+| **Unnatural Pose Transition** | 0.7692 | 100.0% | 62.50% | **0.00%** | 37.50% |
+| **Contact Inconsistency** | 0.9412 | 88.89% | 100.0% | 1.32% | **0.00%** |
+| **Bone Stretch Anomaly** | 1.0000 | 100.0% | 100.0% | **0.00%** | **0.00%** |
 
 ### Calibrated Hybrid Model (`PoseGuard AI`):
 | Defect Class | F1 Score | Precision | Recall | False Positive Rate (FPR) | False Negative Rate (FNR) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Foot Sliding** | 0.7619 | 93.33% | 68.75% | 1.47% | 31.25% |
-| **Ground Penetration** | 0.8000 | 91.67% | 68.75% | 1.47% | 31.25% |
-| **Unnatural Pose Transition** | 0.7059 | 85.71% | 75.00% | 1.32% | 25.00% |
-| **Contact Inconsistency** | 0.6667 | 100.0% | 50.00% | **0.00%** | 50.00% |
-| **Bone Stretch Anomaly** | 0.7895 | 90.00% | 62.50% | 1.32% | 37.50% |
+| **Foot Sliding** | 0.8966 | 100.0% | 81.25% | **0.00%** | 18.75% |
+| **Ground Penetration** | 1.0000 | 100.0% | 100.0% | **0.00%** | **0.00%** |
+| **Unnatural Pose Transition** | 0.7692 | 100.0% | 62.50% | **0.00%** | 37.50% |
+| **Contact Inconsistency** | 1.0000 | 100.0% | 100.0% | **0.00%** | **0.00%** |
+| **Bone Stretch Anomaly** | 0.9412 | 88.89% | 100.0% | 1.32% | **0.00%** |
 
 ---
 

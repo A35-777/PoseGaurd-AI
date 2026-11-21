@@ -3,11 +3,11 @@
   "architecture": "PoseGuardNet (Conv1D + BiGRU + MultiScale Pooling)",
   "trained_from_initialized_weights": true,
   "device_used": "cpu",
-  "parameter_count": 214597,
-  "model_file_size_mb": 0.835,
-  "training_duration_seconds": 73.58,
-  "best_epoch": 17,
-  "best_val_macro_f1": 0.7757,
+  "parameter_count": 235221,
+  "model_file_size_mb": 0.915,
+  "training_duration_seconds": 132.02,
+  "best_epoch": 15,
+  "best_val_macro_f1": 0.8342,
   "defect_classes": [
     "foot_sliding",
     "ground_penetration",
@@ -17,5 +17,5 @@
   ],
   "feature_channels": 48,
   "window_size": 32,
-  "created_timestamp": "2026-11-19 20:20:43"
+  "created_timestamp": "2026-11-21 14:20:46"
 }

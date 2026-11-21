@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PoseGuard AI | 3D Skeletal Animation Motion Defect Analysis</title>
-  <meta name="description" content="Catch hidden motion defects in your 3D skeletal animations. PoseGuard AI autonomously detects foot sliding, ground penetration, and joint pops with a 214,597-parameter model on CPU.">
+  <meta name="description" content="Catch hidden motion defects in your 3D skeletal animations. PoseGuard AI autonomously detects foot sliding, ground penetration, and joint pops with a 235,221-parameter model on CPU.">
   <meta name="keywords" content="3D animation QA, motion defects, foot sliding detection, skeletal animation, motion capture, BVH analysis, tiny AI, game animation">
   <meta name="author" content="PoseGuard AI Contributors">
   <link rel="canonical" href="https://poseguard-ai.pages.dev/">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://poseguard-ai.pages.dev/">
   <meta property="og:title" content="PoseGuard AI | Catch Animation Flaws Before Final Render">
-  <meta property="og:description" content="Autonomous 3D skeletal animation defect analysis powered by a 214,597-parameter model (855 KB checkpoint) and deterministic geometric verification.">
+  <meta property="og:description" content="Autonomous 3D skeletal animation defect analysis powered by a 235,221-parameter model (941 KB checkpoint) and deterministic geometric verification.">
   <meta property="og:image" content="https://poseguard-ai.pages.dev/img/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PoseGuard AI | 3D Skeletal Animation Defect Analysis">
-  <meta name="twitter:description" content="100% offline CPU motion quality inspection. Identifies foot sliding, ground penetration, and joint pops with an 855 KB model.">
+  <meta name="twitter:description" content="100% offline CPU motion quality inspection. Identifies foot sliding, ground penetration, and joint pops with an 941 KB model.">
   <meta name="twitter:image" content="https://poseguard-ai.pages.dev/img/og-preview.png">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -41,8 +41,8 @@
       "price": "0.00",
       "priceCurrency": "USD"
     },
-    "description": "Autonomous 3D skeletal animation motion defect analysis system for detecting foot sliding, ground penetration, and unnatural pose transitions with a 214,597-parameter model.",
-    "softwareVersion": "1.0.0-beta",
+    "description": "Autonomous 3D skeletal animation motion defect analysis system for detecting foot sliding, ground penetration, and unnatural pose transitions with a 235,221-parameter model.",
+    "softwareVersion": "1.0.2-beta",
     "license": "https://www.apache.org/licenses/LICENSE-2.0"
   }
   </script>
@@ -302,7 +302,7 @@ No biomechanical defects detected. Animation meets physical motion thresholds.
 
           <!-- TODO: Replace placeholder testimonial with quote from verified beta studio/animator -->
           <div class="testimonial-card">
-            <p class="testimonial-quote">&ldquo;The 855 KB footprint and zero-GPU requirement made it trivial to run PoseGuard AI inside our continuous integration build cluster.&rdquo;</p>
+            <p class="testimonial-quote">&ldquo;The 941 KB footprint and zero-GPU requirement made it trivial to run PoseGuard AI inside our continuous integration build cluster.&rdquo;</p>
             <div class="testimonial-author">
               <div class="testimonial-avatar" aria-hidden="true">SE</div>
               <div class="testimonial-meta">
@@ -332,15 +332,15 @@ No biomechanical defects detected. Animation meets physical motion thresholds.
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
         <div>
           <span class="beta-badge" style="margin-bottom: 0.75rem; display: inline-block;">Independently Trained</span>
-          <h2 style="font-size: 2rem; line-height: 1.25; margin-bottom: 1rem;">214,597-Parameter Model.<br>Zero Cloud Latency.</h2>
+          <h2 style="font-size: 2rem; line-height: 1.25; margin-bottom: 1rem;">235,221-Parameter Model.<br>Zero Cloud Latency.</h2>
           <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
-            PoseGuardNet uses a tailored 1D Conv-Residual-BiGRU architecture with 214,597 parameters. Model checkpoint size is 855 KB on disk.* It requires no CUDA GPUs, no external API keys, and zero cloud bandwidth.
+            PoseGuardNet uses a tailored 1D Conv-Residual-BiGRU architecture with Squeeze-and-Excitation attention in 235,221 parameters. Model checkpoint size is 941 KB on disk.* It requires no CUDA GPUs, no external API keys, and zero cloud bandwidth.
           </p>
           <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1.25rem;">
-            *Compact 855 KB trained PyTorch checkpoint designed for local single-core CPU execution without GPU or cloud dependencies.
+            *Compact 941 KB trained PyTorch checkpoint designed for local single-core CPU execution without GPU or cloud dependencies.
           </p>
           <ul style="color: var(--text-muted); list-style: square; padding-left: 1.25rem; line-height: 1.8;">
-            <li><strong style="color: var(--text-main);">0.64 ms Latency</strong>: Real-time analysis on standard multi-core consumer CPUs.</li>
+            <li><strong style="color: var(--text-main);">0.74 ms Latency</strong>: Real-time analysis on standard multi-core consumer CPUs.</li>
             <li><strong style="color: var(--text-main);">Zero Sequence Overlap</strong>: Evaluated on held-out subject kinematics.</li>
             <li><strong style="color: var(--text-main);">100% Offline Privacy</strong>: Your character rigs and proprietary animations never leave your machine.</li>
           </ul>
@@ -388,39 +388,39 @@ result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
           <tbody>
             <tr>
               <td><strong>Deterministic Geometry</strong></td>
-              <td>27.38%</td>
-              <td>0.4351</td>
-              <td>32.90%</td>
+              <td>25.00%</td>
+              <td>0.4235</td>
+              <td>31.98%</td>
               <td><strong>76.25%</strong></td>
-              <td><strong>0.10 ms</strong></td>
+              <td><strong>0.17 ms</strong></td>
               <td>0.0 MB</td>
             </tr>
             <tr>
               <td><strong>Simple Statistical Baseline</strong></td>
-              <td>17.86%</td>
-              <td>0.1231</td>
-              <td>16.00%</td>
-              <td>10.00%</td>
-              <td>0.14 ms</td>
+              <td>50.00%</td>
+              <td>0.1091</td>
+              <td>20.00%</td>
+              <td>7.50%</td>
+              <td>0.33 ms</td>
               <td>0.0 MB</td>
             </tr>
             <tr>
               <td><strong>PoseGuardNet (Neural)</strong></td>
-              <td><strong>82.14%</strong></td>
-              <td><strong>0.7962</strong></td>
-              <td>91.67%</td>
-              <td>72.50%</td>
-              <td>0.53 ms</td>
-              <td><strong>855 KB</strong></td>
+              <td><strong>83.33%</strong></td>
+              <td><strong>0.8423</strong></td>
+              <td><strong>90.55%</strong></td>
+              <td>82.50%</td>
+              <td>0.74 ms</td>
+              <td><strong>941 KB</strong></td>
             </tr>
             <tr>
               <td><strong>Calibrated Hybrid (PoseGuard AI)</strong></td>
-              <td><strong>77.38%</strong></td>
-              <td><strong>0.7447</strong></td>
-              <td><strong>92.18%</strong></td>
-              <td>65.00%</td>
-              <td>0.64 ms</td>
-              <td><strong>855 KB</strong></td>
+              <td><strong>84.52%</strong></td>
+              <td><strong>0.8462</strong></td>
+              <td>87.67%</td>
+              <td><strong>85.00%</strong></td>
+              <td>0.92 ms</td>
+              <td><strong>941 KB</strong></td>
             </tr>
           </tbody>
         </table>
@@ -454,7 +454,7 @@ result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
         <details class="faq-item" open>
           <summary>Does PoseGuard AI require an NVIDIA GPU or CUDA?</summary>
           <div class="faq-content">
-            <p>No. PoseGuard AI is designed specifically for lightweight CPU-only execution. The 214,597-parameter neural network and deterministic geometric engines run smoothly on standard multi-core consumer processors with an active memory footprint under 280 MB RAM.</p>
+            <p>No. PoseGuard AI is designed specifically for lightweight CPU-only execution. The 235,221-parameter neural network and deterministic geometric engines run smoothly on standard multi-core consumer processors with an active memory footprint under 280 MB RAM.</p>
           </div>
         </details>
 
@@ -494,7 +494,7 @@ result = detector.analyze(<span style="color:#38bdf8;">"walk_cycle.bvh"</span>)
       <div class="footer-col">
         <h5>PoseGuard AI</h5>
         <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
-          Autonomous, lightweight 3D skeletal animation motion defect analysis system. Built with an independently trained 214,597-parameter model and deterministic kinematic verification.
+          Autonomous, lightweight 3D skeletal animation motion defect analysis system. Built with an independently trained 235,221-parameter model and deterministic kinematic verification.
         </p>
       </div>
       <div class="footer-col">

@@ -102,13 +102,22 @@ class KinematicFeatureExtractor:
         features[:, 32] = np.max(all_acc_mag, axis=-1)
         features[:, 33] = np.max(all_vel_mag, axis=-1)
         
-        # 34..37: Leg bone length deviations
+        # 34..37: Leg and full-skeleton bone length deviations
         bone_lens = compute_bone_lengths(pos, clip.skeleton.parents)
+        all_bone_diffs = np.zeros(T, dtype=np.float32)
+        for j in range(1, clip.skeleton.num_joints):
+            if clip.skeleton.parents[j] != -1:
+                med_j = np.median(bone_lens[:, j]) if bone_lens.shape[0] > 0 else 0.3
+                if med_j > 0.02:
+                    diff_j = np.abs(bone_lens[:, j] - med_j) / med_j
+                    all_bone_diffs = np.maximum(all_bone_diffs, diff_j)
+                    
         for i, j_target in enumerate([idx_l_foot, idx_r_foot]):
             median_b = np.median(bone_lens[:, j_target]) if bone_lens.shape[0] > 0 else 0.4
             diff_b = np.abs(bone_lens[:, j_target] - median_b) / max(0.01, median_b)
             features[:, 34 + i * 2] = bone_lens[:, j_target]
-            features[:, 35 + i * 2] = diff_b
+            # Max deviation combining local leg and skeleton-wide anomaly
+            features[:, 35 + i * 2] = np.maximum(diff_b, all_bone_diffs)
             
         # 38..39: Left & right foot contact state indicators
         l_contact = compute_foot_contact_state(pos[:, idx_l_foot, 1], vel[:, idx_l_foot, 1], gy)
@@ -116,15 +125,17 @@ class KinematicFeatureExtractor:
         features[:, 38] = l_contact.astype(np.float32)
         features[:, 39] = r_contact.astype(np.float32)
         
-        # 40..41: Horizontal foot speed during contact
+        # 40..41: Horizontal foot speed strictly during contact phase
         l_horiz = np.sqrt(vel[:, idx_l_foot, 0]**2 + vel[:, idx_l_foot, 2]**2)
         r_horiz = np.sqrt(vel[:, idx_r_foot, 0]**2 + vel[:, idx_r_foot, 2]**2)
         features[:, 40] = l_horiz * features[:, 38]
         features[:, 41] = r_horiz * features[:, 39]
         
-        # 42..44: Ground penetration depths for feet and hips
-        features[:, 42] = np.maximum(0.0, gy - pos[:, idx_l_foot, 1])
-        features[:, 43] = np.maximum(0.0, gy - pos[:, idx_r_foot, 1])
+        # 42..44: Ground penetration depths for feet (ankle & toe) and hips
+        l_lowest_y = np.minimum(pos[:, idx_l_foot, 1], pos[:, idx_l_toe, 1])
+        r_lowest_y = np.minimum(pos[:, idx_r_foot, 1], pos[:, idx_r_toe, 1])
+        features[:, 42] = np.maximum(0.0, gy - l_lowest_y)
+        features[:, 43] = np.maximum(0.0, gy - r_lowest_y)
         features[:, 44] = np.maximum(0.0, gy - pos[:, idx_hips, 1])
         
         # 45..47: Temporal differences of velocity (jerk indicators)

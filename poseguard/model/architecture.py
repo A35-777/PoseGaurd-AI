@@ -5,8 +5,26 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Dict, Any
 
+class SqueezeExcitation1d(nn.Module):
+    """Lightweight Channel Attention mechanism for 1D temporal representations."""
+    def __init__(self, channels: int, reduction: int = 8):
+        super().__init__()
+        reduced = max(8, channels // reduction)
+        self.fc = nn.Sequential(
+            nn.AdaptiveAvgPool1d(1),
+            nn.Flatten(),
+            nn.Linear(channels, reduced),
+            nn.ReLU(inplace=True),
+            nn.Linear(reduced, channels),
+            nn.Sigmoid()
+        )
+        
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        w = self.fc(x).unsqueeze(-1)
+        return x * w
+
 class TemporalResidualBlock(nn.Module):
-    """Temporal 1D Convolutional Residual Block with Batch Normalization."""
+    """Temporal 1D Convolutional Residual Block with Squeeze-and-Excitation Attention."""
     def __init__(self, in_channels: int, out_channels: int, kernel_size: int = 3):
         super().__init__()
         padding = kernel_size // 2
@@ -14,6 +32,7 @@ class TemporalResidualBlock(nn.Module):
         self.bn1 = nn.BatchNorm1d(out_channels)
         self.conv2 = nn.Conv1d(out_channels, out_channels, kernel_size=kernel_size, padding=padding)
         self.bn2 = nn.BatchNorm1d(out_channels)
+        self.se = SqueezeExcitation1d(out_channels, reduction=8)
         self.act = nn.LeakyReLU(0.1, inplace=True)
         
         if in_channels != out_channels:
@@ -28,14 +47,15 @@ class TemporalResidualBlock(nn.Module):
         res = self.shortcut(x)
         out = self.act(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
+        out = self.se(out)
         out = self.act(out + res)
         return out
 
 class PoseGuardNet(nn.Module):
     """
     Compact Temporal AI Model for 3D Skeletal Animation Defect Classification.
-    Combines 1D multi-scale temporal convolutions, bidirectional GRU, and attention pooling.
-    Trained strictly from initialized weights on CPU.
+    Combines 1D temporal convolutions with SE attention, bidirectional GRU, and multi-scale temporal pooling.
+    Trained strictly from initialized weights on CPU (< 250k parameters, < 1 MB checkpoint).
     """
     def __init__(
         self,
@@ -57,7 +77,7 @@ class PoseGuardNet(nn.Module):
             nn.MaxPool1d(kernel_size=2)  # 32 -> 16
         )
         
-        # Residual temporal representations
+        # Residual temporal representations with channel attention
         self.res1 = TemporalResidualBlock(hidden_dim, hidden_dim * 2, kernel_size=3)
         self.pool1 = nn.MaxPool1d(kernel_size=2)  # 16 -> 8
         self.dropout1 = nn.Dropout(dropout)
@@ -73,9 +93,10 @@ class PoseGuardNet(nn.Module):
         
         gru_out_dim = gru_hidden * 2  # bidirectional -> 128
         
-        # Multi-scale pooling: Average + Max pooling
+        # Multi-scale feature fusion: Conv temporal summary + GRU dual pooling
+        self.conv_pool = nn.AdaptiveAvgPool1d(1)
         self.classifier = nn.Sequential(
-            nn.Linear(gru_out_dim * 2, 128),
+            nn.Linear(gru_out_dim * 2 + (hidden_dim * 2), 128),
             nn.LeakyReLU(0.1, inplace=True),
             nn.Dropout(dropout),
             nn.Linear(128, 64),
@@ -94,6 +115,7 @@ class PoseGuardNet(nn.Module):
         # Temporal conv feature extraction
         feat = self.stem(x)          # [B, 64, 16]
         feat = self.res1(feat)        # [B, 128, 16]
+        conv_summary = self.conv_pool(feat).squeeze(-1) # [B, 128]
         feat = self.pool1(feat)       # [B, 128, 8]
         feat = self.dropout1(feat)
         
@@ -105,7 +127,7 @@ class PoseGuardNet(nn.Module):
         gru_t = gru_out.transpose(1, 2)
         avg_pool = F.adaptive_avg_pool1d(gru_t, 1).squeeze(-1)  # [B, 128]
         max_pool = F.adaptive_max_pool1d(gru_t, 1).squeeze(-1)  # [B, 128]
-        pooled = torch.cat([avg_pool, max_pool], dim=-1)         # [B, 256]
+        pooled = torch.cat([avg_pool, max_pool, conv_summary], dim=-1) # [B, 384]
         
         logits = self.classifier(pooled)                         # [B, 5]
         return logits
