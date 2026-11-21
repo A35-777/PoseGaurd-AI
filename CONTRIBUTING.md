@@ -15,8 +15,8 @@ Please review and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) in all rep
 1. **Fork the repository** on GitHub.
 2. **Clone your fork locally**:
    ```bash
-   git clone https://github.com/<your-username>/PoseGaurd-AI.git
-   cd PoseGaurd-AI
+   git clone https://github.com/<your-username>/PoseGaurd-AI.git poseguard
+   cd poseguard
    ```
 3. **Set up a dedicated Python virtual environment** (Python 3.10, 3.11, or 3.12 recommended):
    ```bash

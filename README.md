@@ -19,6 +19,19 @@ In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic
 
 ---
 
+## 🧭 Core Philosophy & Guiding Principles
+
+PoseGuard AI is built around a non-negotiable architectural vision:
+
+- **Tiny Models Only**: Powered by `PoseGuardNet`, a 214,597-parameter Conv1D-Residual-BiGRU network stored in a single **855 KB** checkpoint. We do not use gigabyte models, heavy diffusion networks, or cloud LLMs.
+- **100% Offline & CPU-Native**: Inference executes entirely in-process on consumer multi-core CPUs in $< 0.65\text{ ms}$ per temporal window. Zero CUDA, zero cloud dependencies.
+- **Extremely Low Footprint**: Requires $< 280\text{ MB}$ RAM at peak runtime and under 25 MB total disk space (including weights and dependencies).
+- **Hybrid Precision**: Fuses compact neural temporal pattern recognition with exact analytical physics (contact velocity, ground clearance, bone rigidity) to suppress false positives (2.06% FPR).
+- **Advisory QA Tool**: Designed to catch technical glitches and accelerate human review, never to unilaterally dictate aesthetic style or override an animator's creative intent.
+- **Privacy-First**: Zero tracking, zero telemetry, zero external network calls. All data stays strictly on your local machine.
+
+---
+
 ## 📸 Interactive 3D Studio
 
 [![PoseGuard AI Interactive 3D Web Studio](docs/images/studio_preview.gif)](https://poseguard-ai.pages.dev/)
@@ -26,13 +39,31 @@ In modern 3D game animation, motion capture, and VFX pipelines, silent kinematic
 
 ---
 
-## 🚀 Live Demo & Quick Walkthrough
+## ⚡ 2-Minute Quick Start (Clone to First Analysis)
 
-- **🌐 Live Production Website & Interactive Tour**: [https://poseguard-ai.pages.dev](https://poseguard-ai.pages.dev/)
-- **📁 Ready-to-Run Sample Animations**: Explore the [`examples/`](examples/) folder for clean and defective motion sequences.
+Go from a fresh clone to your first verified defect report in under two minutes:
 
-### 1. Command-Line Analysis (CLI)
-Analyze an animation clip in milliseconds with formatted summary diagnostics:
+### 1. Clone & Install
+```bash
+# Clone into local folder 'poseguard'
+git clone https://github.com/A35-777/PoseGaurd-AI.git poseguard
+cd poseguard
+
+# Create and activate virtual environment (Python 3.10–3.12)
+python -m venv .venv
+
+# Windows:
+call .venv\Scripts\activate.bat
+# Linux / macOS:
+source .venv/bin/activate
+
+# Install dependencies and package in editable mode
+pip install -r requirements.txt
+pip install -e .
+```
+
+### 2. Run Instant CLI Analysis on Included Samples
+Analyze a pre-packaged clean animation ($< 200\text{ ms}$ processing time):
 ```bash
 poseguard analyze examples/sample_walk_clean.bvh
 ```
@@ -50,9 +81,9 @@ poseguard analyze examples/sample_walk_clean.bvh
 ================================================================================
 ```
 
-Audit defective motion and export structured JSON/CSV logs for automated CI/CD gating:
+Analyze a defective animation with planted foot sliding and export structured JSON:
 ```bash
-poseguard analyze examples/sample_foot_sliding.npz --format json --out-file audit_report.json
+poseguard analyze examples/sample_foot_sliding.npz --format json --out-file report.json
 ```
 ```text
 ================================================================================
@@ -69,22 +100,41 @@ poseguard analyze examples/sample_foot_sliding.npz --format json --out-file audi
  [CRITICAL] Foot Sliding on 'RightAnkle' (Frames 84–112, conf: 0.91)
    -> Suggested Fix: Lock root-relative horizontal velocity during stance.
 --------------------------------------------------------------------------------
- Full structured report saved to: audit_report.json
+ Full structured report saved to: report.json
 ================================================================================
 ```
 
-Launch the local interactive 3D Web Studio:
+### 3. Launch Local 3D Web Studio
 ```bash
 poseguard serve --port 8000
 ```
-```text
-[INFO] Starting PoseGuard AI 3D Web Studio on http://127.0.0.1:8000
-[INFO] Loaded checkpoint models/poseguard_v1.pt (855 KB, 214,597 parameters) on CPU
-[INFO] Ready for browser sessions. Open http://localhost:8000 to inspect clips.
-```
+Open **`http://localhost:8000`** in any browser to inspect skeleton joints, scrub the timeline, and view defect alerts in 3D.
 
-### 2. Python Native SDK
-Integrate motion defect verification into custom Python pipelines or DCC scripts:
+---
+
+## 📁 Pre-Packaged Examples (`examples/`)
+
+Every repository clone includes runnable sample animations and pre-computed reference JSON reports in the [`examples/`](examples/) directory:
+
+| Sample File | Format | Duration | Expected Verdict | Description |
+| :--- | :---: | :---: | :---: | :--- |
+| [`examples/sample_walk_clean.bvh`](examples/sample_walk_clean.bvh) | BVH | 2.0s (120f) | `[PASS] CLEAN` | Clean bipedal gait with zero foot drift. |
+| [`examples/sample_pivot_turn.bvh`](examples/sample_pivot_turn.bvh) | BVH | 2.0s (120f) | `[PASS] CLEAN` | High-jerk 180° athletic turn demonstrating false-positive suppression. |
+| [`examples/sample_foot_sliding.npz`](examples/sample_foot_sliding.npz) | NPZ | 2.0s (120f) | `[FAIL] CRITICAL` | Synthetic defective sequence featuring planted foot sliding drift. |
+
+Reference expected audit reports for CI assertions:
+- [`examples/expected_walk_clean_report.json`](examples/expected_walk_clean_report.json)
+- [`examples/expected_pivot_turn_report.json`](examples/expected_pivot_turn_report.json)
+- [`examples/expected_foot_sliding_report.json`](examples/expected_foot_sliding_report.json)
+
+See [`examples/README.md`](examples/README.md) for full SDK and batch examples.
+
+---
+
+## 🐍 Python Native SDK
+
+Integrate defect verification into custom Python pipelines or DCC scripts with zero external services:
+
 ```python
 from poseguard import PoseGuard
 
@@ -101,7 +151,7 @@ for defect in result.defects:
     print(f"[{defect.severity.upper()}] {defect.type} on '{defect.joint}'")
     print(f"  Frames: {defect.start_frame}–{defect.end_frame} ({defect.duration_sec:.2f}s)")
     print(f"  Confidence: {defect.confidence:.2f} ({defect.verification_status})")
-    print(f"  Correction: {defect.suggested_correction}")
+    print(f"  Suggested Fix: {defect.suggested_correction}")
 ```
 
 ---
@@ -139,32 +189,6 @@ for defect in result.defects:
 
 ---
 
-## 🚀 Installation
-
-### Option A: Windows
-```cmd
-git clone https://github.com/A35-777/PoseGaurd-AI.git
-cd PoseGaurd-AI
-py -3.12 -m venv .venv
-call .venv\Scripts\activate.bat
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .
-```
-
-### Option B: Linux & macOS
-```bash
-git clone https://github.com/A35-777/PoseGaurd-AI.git
-cd PoseGaurd-AI
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .
-```
-
----
-
 ## 📊 Benchmark Evaluation
 
 The benchmark below compares four diagnostic approaches evaluated on an unseen, held-out test motion sequence (`subj_06_pivot_turn`, 84 temporal windows):
@@ -180,13 +204,13 @@ The benchmark below compares four diagnostic approaches evaluated on an unseen, 
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Practical, Lightweight Roadmap
 
-The planned engineering milestones leading up to production v1.0.0 include:
+Our development milestones focus exclusively on practical, offline, and lightweight tooling—never heavy models or cloud services:
 
-- [ ] **Headless FBX Ingestion**: Direct parsing of binary FBX animation clips without manual Blender BVH export.
-- [ ] **Raycasted Non-Planar Terrain**: Floor boundary tracking over sloped ground, stairs, and dynamic heightmaps.
-- [ ] **Blender & Unreal Engine 5 Add-ons**: Viewport timeline defect markers and scrubbing directly inside DCC tools.
+- [ ] **Headless FBX Ingestion**: Lightweight pure-Python / open-source FBX ASCII-to-BVH conversion bridge to streamline ingest without manual Blender export.
+- [ ] **Raycasted Non-Planar Terrain**: Local elevation surface tracking over sloped ground, stairs, and heightmaps.
+- [ ] **Blender & Unreal Engine 5 Viewport Add-ons**: In-viewport timeline scrubbing and defect markers directly inside DCC tools.
 - [ ] **Multi-Rig Joint Topology Presets**: Out-of-the-box remapping profiles for Mixamo, UE5 Mannequin, and custom rigs.
 
 ---

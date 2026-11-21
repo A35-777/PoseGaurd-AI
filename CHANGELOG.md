@@ -13,7 +13,7 @@ Format adheres to Keep a Changelog, and this project adheres to Semantic Version
 - **Security & Vulnerability Reporting**: Enhanced `SECURITY.md` with structured disclosure pathways and response timelines.
 
 ### Changed
-- **README Overhaul**: Added "Why PoseGuard?" value proposition, live demo section with real CLI and Python SDK outputs, roadmap milestones, and status badges.
+- **README Overhaul**: Added "Why PoseGuard?" value proposition, explicit Core Philosophy & Guiding Principles, 2-minute clone-to-result quickstart, live demo section with real CLI and Python SDK outputs, roadmap milestones, and status badges.
 - **Model Card Provenance**: Corrected model card authorship to independent open-source research contributors.
 - **Benchmark & Evaluation Protocol**: Expanded `docs/BENCHMARKS.md` with sampling window methodology, held-out Subject 6 zero-leakage protocol, and future multi-dataset evaluation roadmap.
 - **Limitations Transparency**: Enhanced `docs/LIMITATIONS.md` visibility and boundary condition explanations for planar ground and stylized animations.
