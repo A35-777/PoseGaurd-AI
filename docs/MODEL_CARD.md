@@ -12,7 +12,7 @@
 - **Inference Runtime**: CPU-Only (`torch.device("cpu")`), No CUDA dependency
 - **Inference Latency**: **0.53 ms per window** (~1,880 windows/second on AMD A12 CPU)
 - **License**: Apache 2.0
-- **Developers**: Google DeepMind / Autonomous Build
+- **Developers**: PoseGuard AI Contributors (Independent Open Source Research)
 
 ---
 
