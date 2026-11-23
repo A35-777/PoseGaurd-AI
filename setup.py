@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name="poseguard",
     version="1.0.2",
-    author="PoseGuard AI Contributors",
-    author_email="contributors@poseguard.io",
+    author="Arin Goel",
+    author_email="toaringoel@gmail.com",
     description="PoseGuard AI — 3D Skeletal Animation Motion Defect Analysis System",
     url="https://github.com/A35-777/PoseGaurd-AI",
     packages=find_packages(),
